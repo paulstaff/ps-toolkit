@@ -1,0 +1,25 @@
+#psToastContainer {
+
+    /* Required Styles */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 100vw;
+    overflow-y: visible;
+    z-index: 1500;
+
+}
+
+.psToast {
+
+    /* Required Styles */
+    width: 100vw;
+    z-index: 1500;
+    padding: 10px;
+    border-top: 1px solid #BAE1F5;
+    background: rgba(186,225,245, 0.5);
+    color: #31708F;
+    text-align: center;
+
+}

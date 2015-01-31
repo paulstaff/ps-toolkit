@@ -1,0 +1,158 @@
+/*
+ *
+ *  Programmer: Paul Staff
+ *  Date: 2014.05.16
+ *
+ *  Copyright (c) 2014, nplexity, LLC.  All Rights Reserved.
+ *  www.nplexity.com
+ *
+ *  psModal.css
+ *
+ *
+ *  This is the CSS stylesheet for psModal modal windows.
+ *
+ *  To customize the modal elements, edit the custom style sections of the
+ *  style blocks below.
+ *
+ *  DO NOT EDIT the sections titled 'Required Styles', as these are
+ *  necessary to properly display the modal window.
+ *
+ *
+ */
+
+#psModalBack {
+
+    /* Required Styles */
+    display: none;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1999;
+
+    /* Add Custom Styles Here */
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.25);
+
+}
+
+#psModalWindow {
+
+    /* Required Styles */
+    position: relative;
+    z-index: 2000;
+
+    /* Add Custom Styles Here */
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    min-width: 400px;
+
+}
+
+#psModalHeader {
+
+    /* Required Styles */
+    position: relative;
+
+    /* Add Custom Styles Here */
+    background: none repeat scroll 0 0 #F9F9F9;
+    border-bottom: 1px solid #CCCCCC;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 15px 20px 12px;
+
+}
+
+#psModalHeaderTitle, #psModalHeaderClose {
+
+    /* Required Styles */
+    font-size: 16px;
+    line-height: 24px;
+
+    /* Add Custom Styles Here */
+
+}
+
+#psModalHeaderTitle {
+
+    /* Add Custom Styles Here */
+    font-weight: bold;
+
+}
+
+#psModalHeaderClose {
+
+    /* Required Styles */
+    font-size: 24px;
+    font-weight: 500;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    cursor: pointer;
+
+    /* Add Custom Styles Here */
+    color: #000000;
+
+}
+
+#psModalHeaderClose:hover {
+
+    /* Add Custom Styles Here */
+    color: #C62626;
+
+}
+
+#psModalBody {
+
+    /* Add Custom Styles Here */
+    padding: 10px 20px;
+
+}
+
+.psModalItem {
+
+    /* Add Custom Styles Here */
+    margin: 10px 0;
+
+}
+
+#psModalFooter {
+
+    /* Add Custom Styles Here */
+    margin-top: 25px;
+    border-top: 1px solid #CCCCCC;
+    padding: 18px 0 8px 0;
+
+}
+
+#psToastContainer {
+
+    /* Required Styles */
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100vw;
+    overflow-y: visible;
+    z-index: 1500;
+    padding-top: 50px;
+
+}
+
+.psToast {
+
+    /* Required Styles */
+    margin: 10px auto;
+    width: 600px;
+    z-index: 1500;
+    padding: 8px;
+    border: 1px solid #31708F;
+    background: #D9EDF7;
+    color: #31708F;
+    text-align: center;
+    border-radius: 3px;
+
+
+}
+

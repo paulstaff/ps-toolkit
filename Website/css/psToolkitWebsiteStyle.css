@@ -1,0 +1,288 @@
+/**************************************************************
+    CSS Import
+**************************************************************/
+
+@import url('../fonts/genericons/genericons.css');
+
+/**************************************************************
+    CSS Reset (courtesy of meyerweb)
+**************************************************************/
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/**************************************************************
+    Main CSS Styles
+**************************************************************/
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+}
+
+a {
+    color: #589CE8;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #2A66AA;
+}
+
+.contentParagraph {
+    padding: 10px;
+}
+
+.centered {
+    text-align: center;
+}
+
+.headerContainer {
+
+}
+
+.headerLogo {
+    display: inline-block;
+    vertical-align: top;
+    background-color: #2A66AA;
+    width: 300px;
+    color: #FFFFFF;
+    font-size: 36px;
+    line-height: 94px;
+    text-align: center;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.headerBar {
+    display: inline-block;
+    vertical-align: top;
+    width: calc(100% - 300px);
+    background-color: #589CE8;
+    color: #FFFFFF;
+    text-align: right;
+}
+
+.headerItem {
+    display: inline-block;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    width: 75px;
+}
+
+.headerItem:hover {
+    background-color: #2A66AA;
+}
+
+.headerItemImg {
+    font-family: 'Genericons', sans-serif;
+    font-size: 48px;
+}
+
+.navBar {
+    display: inline-block;
+    vertical-align: top;
+    width: 300px;
+    height: calc(100vh - 94px);
+    background-color: #3A4450;
+    color: #FFFFFF;
+    padding: 15px 0;
+    box-sizing: border-box;
+}
+
+.navItemTitle {
+    padding: 15px;
+    cursor: pointer;
+    position: relative;
+}
+
+.navItemTitle:hover {
+    background-color: #589CE8;
+}
+
+.navItemTitle:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0);
+}
+
+.navIcon {
+    font-family: 'Genericons', sans-serif;
+    font-size: 16px;
+    line-height: 16px;
+    vertical-align: top;
+}
+
+.navSubContainer {
+    background-color: #4D5A6B;
+}
+
+.navSubItem {
+    padding: 12px 0 12px 45px;
+    cursor: pointer;
+    position: relative;
+}
+
+.navSubItem:hover {
+    background-color: #67788F;
+}
+
+.navSubItem:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0);
+}
+
+.pageContentContainer {
+    display: inline-block;
+    vertical-align: top;
+    width: calc(100% - 300px);
+    height: calc(100vh - 94px);
+    overflow-y: scroll;
+}
+
+#pageContent {
+    display: none;
+}
+
+.heroImg {
+    width: 100%;
+    background: url("../img/heroImage.jpg") no-repeat 50% 50%;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+}
+
+.heroImg:after {
+    display: block;
+    position: absolute;
+    content: "";
+    z-index: 3;
+    bottom: 0;
+    left: 50%;
+    margin-left: -12px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 24px 24px 24px;
+    border-color: transparent transparent #FFFFFF transparent;
+
+}
+
+.heroText {
+    width: 100%;
+    text-align: center;
+    font-size: 80px;
+    color: #FFFFFF;
+    padding: 125px 0;
+    z-index: 4;
+    background-color: rgba(0,0,0,.50);
+}
+
+.heroSubText {
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+    padding: 30px 0;
+}
+
+.exampleItem {
+    display: inline-block;
+    width: 33.33%;
+    text-align: center;
+    color: #FFFFFF;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.exampleOverlay {
+    padding: 6vw 0;
+    width: 100%;
+    background-color: rgba(0,0,0,.25);
+}
+
+.exampleOverlay:hover {
+    background-color: rgba(255,255,255,.25);
+}
+
+.exampleLetter {
+    font-size: 60px;
+    line-height: 85px;
+}
+
+#examplePSDropdown {
+    background: url("../img/PSDropdown.jpg") no-repeat 50% 50%;
+}
+
+#examplePSModal {
+    background: url("../img/PSModal.jpg") no-repeat 50% 50%;
+}
+
+#examplePSToast {
+    background: url("../img/PSToast.jpg") no-repeat 50% 50%;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #589CE8;
+    color: #FFFFFF;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.btn:hover {
+    background-color: #2A66AA;
+}
