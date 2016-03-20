@@ -23,6 +23,11 @@ $(document).ready(function() {
     //psDropdown.convert();
 });
 
+
+
+
+
+
 function PsDropdown() {
 
     this.options = {
@@ -33,16 +38,35 @@ function PsDropdown() {
         'icon': 'arrow'
     };
 
+    function setAttributes(elem, attr) {
+        for (var prop in attr) {
+            if (prop == 'style' && typeof attr[prop] === 'object') {
+                for (var style in attr[prop]) {
+                    elem.style[style] = attr[prop][style];
+                }
+            } else {
+                elem.setAttribute(prop, attr[prop]);
+            }
+        }
+    }
+
     this.testconvert = function() {
 
 
 
         var selectArray = document.querySelectorAll('.ps-dropdown');
 
-        var dropdown = '';
+        var dropdown;
         var dropdownId = '';
-        var classList = '';
+        var className = '';
         var dropdownOptions;
+
+        var display;
+        var hidden;
+        var optionsWrapper;
+        var optionNode;
+
+        var attr;
 
         var i = 0;
         var j = 0;
@@ -51,14 +75,61 @@ function PsDropdown() {
 
         for (i = 0; i < selectArray.length; ++i) {
 
-            console.log('looping: ' + selectArray[i]);
+            dropdownId = selectArray[i].id != '' ? selectArray[i].id : generateId(10);
+            className = selectArray[i].className.replace('ps-dropdown', '');
+            k = selectArray[i].options.selectedIndex;
 
+            dropdown = document.createElement('div');
+            setAttributes(dropdown, {
+                'id': dropdownId + '-wrapper',
+                'class': className + ' ps-dropdown-wrapper',
+                'data-dropdown-id': dropdownId
+            });
+
+            display = document.createElement('div');
+            setAttributes(display, {
+                'id': dropdownId + '-display',
+                'class': 'ps-dropdown-display'
+            });
+            display.innerHTML = selectArray[i].options[k].text;
+
+            hidden = document.createElement('input');
+            setAttributes(hidden, {
+                'type': 'hidden',
+                'id': dropdownId,
+                'name': selectArray[i].name,
+                'value': selectArray[i].options[k].value
+            });
+
+            optionsWrapper = document.createElement('div');
+            setAttributes(optionsWrapper, {
+                'class': 'ps-dropdown-options-wrapper'
+            });
+
+            // Loop through options and add to optionsWrapper
+            for (j = 0; j < selectArray[i].options.length; ++j) {
+                optionNode = document.createElement('div');
+                setAttributes(optionNode, {
+                    'class': 'ps-dropdown-option',
+                    'data-value': selectArray[i].options[j].value,
+                    'data-dropdown-id': dropdownId
+                });
+                optionNode.innerHTML = selectArray[i].options[j].text;
+                optionsWrapper.appendChild(optionNode);
+            }
+
+            dropdown.appendChild(display);
+            dropdown.appendChild(hidden);
+            dropdown.appendChild(optionsWrapper);
+
+            console.log(dropdown);
+
+            /*
             // Create dropdown
             dropdown = '';
-            dropdownId = selectArray[i].id != '' ? selectArray[i].id : generateId(10);
+
             console.log('id: ' + dropdownId);
-            classList = selectArray[i].className.replace('ps-dropdown', '');
-            k = selectArray[i].options.selectedIndex;
+
 
             dropdown += '\n<div id="' + dropdownId + '-wrapper" class="ps-dropdown-wrapper" data-dropdown-id="' + dropdownId + '">';
             dropdown += '\n   <div class="ps-dropdown-display" ';
@@ -66,7 +137,7 @@ function PsDropdown() {
             dropdown += '\n         ' + selectArray[i].options[k].text + '</div>';
 
             dropdown += '\n   <input type="hidden"';
-            dropdown += '\n         class="ps-dropdown-hidden ' + classList + '" ';
+            dropdown += '\n         class="ps-dropdown-hidden ' + className + '" ';
             dropdown += '\n         id="' + dropdownId + '" ';
             dropdown += '\n         name="' + selectArray[i].name + '" ';
             dropdown += '\n         value="' + selectArray[i].options[k].value + '"/>';
@@ -82,9 +153,10 @@ function PsDropdown() {
 
             console.log('d: ' + dropdown);
 
+            */
+
             // Replace select with dropdown
-            selectArray[i].insertAdjacentHTML('afterend', dropdown);
-            selectArray[i].parentElement.removeChild(selectArray[i]);
+            selectArray[i].parentElement.replaceChild(dropdown, selectArray[i]);
 
             dropdownOptions = document.querySelector('#' + dropdownId + '-wrapper').querySelectorAll('.ps-dropdown-option');
 
