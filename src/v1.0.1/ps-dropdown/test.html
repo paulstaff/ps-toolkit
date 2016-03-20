@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PS Dropdown Test</title>
+
+    <link rel="stylesheet" type="text/css" href="ps-dropdown.css">
+    <script type="text/javascript" src="jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="ps-dropdown.js"></script>
+
+    <style type="text/css">
+
+        * { margin: 0; padding: 0; }
+
+        body {
+            font-family: Helvetica Neue, Helvetica, Arial, Sans-Serif;
+            line-height: 1.5em;
+        }
+
+        .test-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .test-text {
+            margin: 0 0 15px 0;
+            max-width: 400px;
+        }
+
+        .test-input {
+            width: 250px;
+            margin: 0 0 15px 0;
+        }
+
+        .test-btn {
+            display: inline-block;
+            background-color: #2A66AA;
+            color: #FFFFFF;
+            padding: 7px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .test-btn:hover {
+            background-color: #589CE8;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="test-container">
+    <div class="test-text">Click the 'Convert' button below to run PS Dropdown. Click 'Test' to test the selection:</div>
+    <div>
+        <select class="ps-dropdown test-input">
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+    </div>
+    <div>
+        <select class="ps-dropdown test-input">
+            <option value="A">X</option>
+            <option value="B">Y</option>
+            <option value="C">Z</option>
+        </select>
+    </div>
+    <div>
+        <select class="ps-dropdown test-input">
+            <option value="q">Apple</option>
+            <option value="w">Orange</option>
+            <option value="e">Strawberry</option>
+        </select>
+    </div>
+    <div class="test-btn" id="convert-btn">Convert</div>
+    <div class="test-btn" id="test-btn">Test</div>
+</div>
+
+<script type="text/javascript">
+
+    document.querySelector('#convert-btn').addEventListener('click', function() {
+        psDropdown.testconvert();
+    });
+
+</script>
+
+</body>
+</html>
