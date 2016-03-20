@@ -62,8 +62,6 @@ Installation
         });
     };
 
-    psModal.open(options, callback);
-
 	```
 
 5. Call `psModal.open()` with the variables created above to generate the modal window:
@@ -97,13 +95,13 @@ There are number of preset elements designed and styled specifically to be used 
 The standard default options properties are set as follows:
 
 ```Javascript
-    var standardOptions = {
-        'header': true,
-        'closeModalBack': true,
-        'width': '50vw',
-        'title': '',
-        'content': ''
-    };
+var standardOptions = {
+    'header': true,
+    'closeModalBack': true,
+    'width': '50vw',
+    'title': '',
+    'content': ''
+};
 ```
 
 
@@ -114,10 +112,10 @@ The `callback` variable allows a callback function to be passed into either the 
 
 ### Modal Functions
 
-- `ps-modal.getStandardOptions()` - returns an `options` object with the default standard values
-- `ps-modal.open(options, callback)` - function to open a new modal window
-- `ps-modal.update(options, callback)` - function to update an existing modal window
-- `ps-modal.close()` - function to close the modal window
+- `psModal.getStandardOptions()` - returns an `options` object with the default standard values
+- `psModal.open(options, callback)` - function to open a new modal window
+- `psModal.update(options, callback)` - function to update an existing modal window
+- `psModal.close()` - function to close the modal window
 
 
 ### Editing Your Modal Window
