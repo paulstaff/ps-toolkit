@@ -20,7 +20,8 @@
  *
  */
 
-$(document).ready(function() {
+// Initiate ps-modal upon document fully loaded
+document.addEventListener("DOMContentLoaded", function(event) {
     window.psModal = new PsModal();
 });
 
