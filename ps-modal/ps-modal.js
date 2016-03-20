@@ -12,21 +12,22 @@
  *
  *  This script instantiates a new ps-modal object that can be used to
  *  display a modal window for displaying custom popup content. Simply
- *  call ps-modal.modalOpen(), provide a title and content, and ps-modal
+ *  call psModal.open(), provide a title and content, and ps-modal
  *  will display a beautifully formatted modal window.  Customize the
- *  look and feel of the modal window with the psModal.css file.
+ *  look and feel of the modal window with the ps-modal.css file.
  *
  *  ps-modal requires jQuery and ps-modal.css to function correctly.
  *
  */
 
 // Initiate ps-modal upon document fully loaded
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("DOMContentLoaded", function(e) {
     window.psModal = new PsModal();
 });
 
 function PsModal() {
 
+    // Set the standard options
     var standardOptions = {
         'header': true,
         'closeModalBack': true,
@@ -35,10 +36,12 @@ function PsModal() {
         'content': ''
     };
 
+    // Function to return the standard options
     this.getStandardOptions = function() {
         return standardOptions;
     };
 
+    // Function to create and open a modal window
     this.open = function(options, callback) {
 
         // Reset all options
@@ -52,7 +55,7 @@ function PsModal() {
         var modalHtml = '';
 
         // Add modal-back and modal-window
-        modalHtml += '<div id="ps-modal-back" class="fadeIn">';
+        modalHtml += '<div id="ps-modal-back" class="ps-modal-fade-in">';
         modalHtml += '    <div id="ps-modal-window">';
 
         // Add header if applicable
@@ -89,6 +92,7 @@ function PsModal() {
         }
     };
 
+    // Function to update existing modal window
     this.update = function(options, callback) {
 
         // Reset all options
@@ -100,8 +104,9 @@ function PsModal() {
 
         // Set the header if applicable
         if (options.header == true) {
+
+            // If header does not currently exist, add it
             if (document.querySelector('#ps-modal-header') === null) {
-                console.log('undefined');
                 var headerHtml = '';
 
                 headerHtml += '        <div id="ps-modal-header">';
@@ -110,14 +115,18 @@ function PsModal() {
                 headerHtml += '        </div>';
 
                 document.querySelector('#ps-modal-window').insertAdjacentHTML('afterbegin', headerHtml);
+
+            // If header does exist, update title
             } else {
                 document.querySelector('#ps-modal-header-title').innerHTML = options.title;
             }
+
+        // If header option has been changed to false, remove header
         } else if (document.querySelector('#ps-modal-header') !== null) {
             document.querySelector('#ps-modal-window').removeChild(document.querySelector('#ps-modal-header'));
         }
 
-        // Add click event to modal-back and stop propagation if applicable
+        // Add click event to modal-back and stop propagation if applicable, else remove
         if (options.closeModalBack != false) {
             document.querySelector('#ps-modal-back').addEventListener('click', psModal.close);
             document.querySelector('#ps-modal-window').addEventListener('click', function(e) { e.stopPropagation() });
@@ -137,16 +146,16 @@ function PsModal() {
         }
     };
 
+    // Function to close the modal window
     this.close = function() {
-        modalClose();
-    };
 
-    function modalClose() {
-        document.querySelector('#ps-modal-back').classList.remove('fadeIn');
-        document.querySelector('#ps-modal-back').classList.add('fadeOut');
+        // Change CSS to fade out
+        document.querySelector('#ps-modal-back').classList.remove('ps-modal-fade-in');
+        document.querySelector('#ps-modal-back').classList.add('ps-modal-fade-out');
 
+        // Remove the modal-back element after fade out is complete
         setTimeout(function() {
             document.querySelector('body').removeChild(document.querySelector('#ps-modal-back'));
         }, 250);
-    }
+    };
 }

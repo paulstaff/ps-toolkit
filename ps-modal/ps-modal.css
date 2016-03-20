@@ -36,6 +36,38 @@
 
 }
 
+.ps-modal-fade-in {
+    animation-duration: .25s;
+    animation-fill-mode: forwards;
+    animation-name: ps-modal-fade-in;
+}
+
+@keyframes ps-modal-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.ps-modal-fade-out {
+    animation-duration: .25s;
+    animation-fill-mode: forwards;
+    animation-name: ps-modal-fade-out;
+}
+
+@keyframes ps-modal-fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
 #ps-modal-window {
 
     /* Required Styles */
@@ -47,9 +79,8 @@
 
     /* Add Custom Styles Here */
     background: none repeat scroll 0 0 #FFFFFF;
-    border: 1px solid #CCCCCC;
-    border-radius: 5px;
-    min-width: 400px;
+    border-radius: 2px;
+    box-shadow: 10px 10px 35px -5px rgba(0,0,0,0.50);
 
 }
 
@@ -108,9 +139,12 @@
 
 #ps-modal-body {
 
+    /* Required Styles */
+    overflow-y: scroll;
+    max-height: 85vh;
+
     /* Add Custom Styles Here */
     padding: 10px 20px;
-    max-height: 85vh;
 
 }
 
@@ -158,38 +192,4 @@
     border-radius: 3px;
 
 
-}
-
-
-
-.fadeIn {
-    animation-duration: .25s;
-    animation-fill-mode: forwards;
-    animation-name: fadeIn;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-.fadeOut {
-    animation-duration: .25s;
-    animation-fill-mode: forwards;
-    animation-name: fadeOut;
-}
-
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
 }
