@@ -5,7 +5,6 @@
 
     <link rel="stylesheet" type="text/css" href="ps-dropdown.css">
     <link rel="stylesheet" type="text/css" href="font-awesome-4.5.0/css/font-awesome.min.css">
-    <script type="text/javascript" src="jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="ps-dropdown.js"></script>
 
     <style type="text/css">
@@ -64,19 +63,22 @@
     </div>
     <div>
         <select class="ps-dropdown test-input">
-            <option value="A">X</option>
-            <option value="B">Y</option>
-            <option value="C">Z</option>
+            <option value="A">Option A</option>
+            <option value="B">Option B</option>
+            <option value="C">Option C</option>
         </select>
     </div>
+    <div class="test-text">Changing this dropdown will change the icons used:</div>
     <div>
-        <select class="ps-dropdown test-input">
-            <option value="q">Apple</option>
-            <option value="w">Orange</option>
-            <option value="e">Strawberry</option>
+        <select class="ps-dropdown test-input" id="iconSelect">
+            <option value="chevron-down">Chevron Down</option>
+            <option value="chevron-circle-down">Chevron Circle Down</option>
+            <option value="arrow-down">Arrow Down</option>
+            <option value="plus">Plus</option>
         </select>
     </div>
     <div class="test-btn" id="convert-btn">Convert</div>
+    <div class="test-btn" id="change-btn">Change Icon</div>
     <div class="test-btn" id="test-btn">Test</div>
 </div>
 
@@ -86,10 +88,23 @@
         psDropdown.convert();
     });
 
-    document.querySelector('#test-btn').addEventListener('click', function() {
+    document.querySelector('#change-btn').addEventListener('click', function() {
         psDropdown.setOptions({
-            'icon': 'chevron-circle-down'
+            'icon': document.querySelector('#iconSelect').value
         });
+    });
+
+    document.querySelector('#test-btn').addEventListener('click', function() {
+
+        var dropdowns = document.querySelectorAll('.ps-dropdown');
+        var output = 'The fields are:';
+
+        for (var i = 0; i < dropdowns.length; ++i) {
+            output += '\n' + dropdowns[i].id + ': ' + dropdowns[i].getAttribute('value');
+        }
+
+        alert(output);
+
     });
 
 </script>

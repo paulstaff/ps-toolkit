@@ -80,9 +80,11 @@ function PsDropdown() {
             // Create the dropdown-wrapper node
             dropdown = document.createElement('div');
             setAttributes(dropdown, {
-                'id': dropdownId + '-wrapper',
+                'id': dropdownId,
                 'class': selectArray[i].className,
-                'data-dropdown-id': dropdownId
+                'data-dropdown-id': dropdownId,
+                'name': selectArray[i].name,
+                'value': selectArray[i].options[k].value
             });
             dropdown.addEventListener('click', showOptions);
 
@@ -102,13 +104,14 @@ function PsDropdown() {
             icon.innerHTML = '<i class="fa fa-' + options.icon + '"></i>';
 
             // Create the dropdown-hidden node
-            hidden = document.createElement('input');
+            /*hidden = document.createElement('input');
             setAttributes(hidden, {
                 'type': 'hidden',
                 'id': dropdownId,
+                'class': 'ps-dropdown-value',
                 'name': selectArray[i].name,
                 'value': selectArray[i].options[k].value
-            });
+            });*/
 
             // Create the dropdown-options-wrapper node
             optionsWrapper = document.createElement('div');
@@ -135,7 +138,7 @@ function PsDropdown() {
             // Append all child nodes to the dropdown-wrapper node
             dropdown.appendChild(display);
             dropdown.appendChild(icon);
-            dropdown.appendChild(hidden);
+            //dropdown.appendChild(hidden);
             dropdown.appendChild(optionsWrapper);
 
             // Replace select with dropdown
@@ -150,7 +153,7 @@ function PsDropdown() {
         var dropdownId = this.getAttribute('data-dropdown-id');
 
         // Set hidden field to value and display field to text
-        document.querySelector('#' + dropdownId).value = this.getAttribute('data-value');
+        document.querySelector('#' + dropdownId).setAttribute('value', this.getAttribute('data-value'));
         document.querySelector('#' + dropdownId + '-display').innerHTML = this.innerHTML;
     }
 
