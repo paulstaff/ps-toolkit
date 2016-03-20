@@ -42,13 +42,20 @@ function navigate(page, back) {
 
     switch(page) {
         case "home":
-            loadContent("lib/home.html");
+            loadContent("lib/home.html", null);
             break;
         case "about":
             loadMarkdown("lib/about.md", null);
             break;
         case "download":
-            loadContent("src/psToolkit.zip");
+            loadContent("src/psToolkit.zip", null);
+            break;
+        case "delaunay":
+            loadContent("lib/delaunay.html", function() {
+                $.getScript("src/Delaunay Triangulation/trigScript.js", function() {
+                    window.trigObj = trigScript(30);
+                });
+            });
             break;
         case "psDropdown":
             loadMarkdown("src/psDropdown/readme.md", function() {
@@ -92,17 +99,21 @@ function navigate(page, back) {
             });
             break;
         default:
-            loadContent("lib/home.html");
+            loadContent("lib/home.html", null);
             break;
     }
 }
 
 
-function loadContent(path) {
+function loadContent(path, callback) {
 
     $.get(path, function(data) {
         $("#pageContent").fadeOut(250, function() {
-            $(this).html(data).scrollTop(0).fadeIn(250);
+            $(this).html(data).scrollTop(0);
+
+            if(callback != null) { callback(); }
+
+            $(this).fadeIn(250);
         });
     });
 }

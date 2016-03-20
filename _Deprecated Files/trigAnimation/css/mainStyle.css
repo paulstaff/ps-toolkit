@@ -1,0 +1,63 @@
+@font-face {
+	font-family: Existence-Light;
+	src: local("Existence-Light"),
+	local("Existence-Light"),
+	url("../fonts/Existence-Light.otf");
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	background: #2C2E3C;
+	font-family: Existence-Light, Helvetica, Verdana, Arial, Sans-Serif;
+}
+
+#header {
+	background: #3F4253;
+}
+
+#header .title {
+	font-size: 48px;
+	line-height: 72px;
+	width: 100vw;
+	text-align: center;
+	color: #DDDDDD;
+	padding: 15px 0 10px 0;
+}
+
+#header .subtitle {
+	font-size: 20px;
+	line-height: 40px;
+	color: #CCCCCC;
+	text-align: center;
+	padding: 0 0 10px 0;
+}
+
+#canvas {
+	height: 500px;
+	width: 500px;
+	display: block;
+	margin: 25px auto;
+}
+
+#menu {
+	width: 100vw;
+	text-align: center;
+}
+
+.btn {
+	display: inline-block;
+	color: #DDDDDD;
+	font-size: 22px;
+	line-height: 32px;
+	padding: 12px 35px 10px 35px;
+	background: #3F4253;
+	cursor: pointer;
+}
+
+.btn:hover {
+	background: #50536D;
+}

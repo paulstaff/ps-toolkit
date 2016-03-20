@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Paul Staff | TrigScript</title>
+
+	<!-- Javascript -->
+	<script src="js/jquery-2.1.0.min.js"></script>
+	<script src="js/trigScript.js"></script>
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+                window.trigObj = trigScript(30);
+
+			$("#pause").click(function() {
+				pauseScript();
+			});
+
+			$("#source").click(function() {
+				window.location="js/trigScript.js";
+			});
+
+			function pauseScript() {
+				clearTimeout(window.t);
+				$("#pause").html("Start Script");
+				$("#pause").off("click").click(function() {
+					startScript();
+				});
+			}
+
+			function startScript() {
+				$("#pause").html("Pause Script");
+				$("#pause").off("click").click(function() {
+					pauseScript();
+				});
+				window.trigObj.runScript();
+			}
+		});
+
+	</script>
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="css/mainStyle.css">
+
+</head>
+
+<body>
+
+<div id="header">
+	<div class="title">Fancy Triangle Animation</div>
+	<div class="subtitle">Otherwise Known as a Delaunay Triangulation</div>
+</div>
+
+<div>
+	<canvas id="canvas" height="500px" width="500px">
+	Your browser does not support the HTML5 canvas tag.
+	</canvas>
+
+	<div id="menu">
+		<div class="btn" id="pause">Pause Script</div>
+		<div class="btn" id="source">Source</div>
+	</div>
+</div>
+
+</body>
+</html>
