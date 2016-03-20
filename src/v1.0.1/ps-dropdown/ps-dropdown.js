@@ -18,26 +18,204 @@
    *
    */
 
-$(document).ready(function() {
-    window.psDropdown = new PsDropdown;
-    //psDropdown.convert();
+
+// Initiate ps-dropdown upon document fully loaded
+document.addEventListener("DOMContentLoaded", function(e) {
+    window.psDropdown = new PsDropdown();
 });
-
-
-
-
-
 
 function PsDropdown() {
 
-    this.options = {
-        icon: "arrow"  // Defaults to "arrow".  Change this to "chevron" to display a chevron or "none" to not display an icon.  Edit icon styles in PSDropdown.css
-    };
-
+    // Defines the standard options for PS Dropdown
     var standardOptions = {
-        'icon': 'arrow'
+        'icon': 'chevron-down' // other options include any font-awesome icon, including 'arrow-down', 'chevron-circle-down', 'plus', etc.
     };
 
+    // Initialize the options variable with standard options
+    var options = standardOptions;
+
+    // Function to allow custom options to be set
+    this.setOptions = function(newOptions) {
+        for (var o in newOptions) {
+            if (options.hasOwnProperty(o)) {
+                options[o] = newOptions[o];
+            }
+        }
+    };
+
+    // Function to reset the options to default
+    this.resetOptions = function() {
+        options = standardOptions;
+    };
+
+    // Function to convert all select elements with the class of 'ps-dropdown' to ps-dropdown elements
+    this.convert = function() {
+
+        // Retrieve all select elements with the class of 'ps-dropdown'
+        var selectArray = document.querySelectorAll('select.ps-dropdown');
+
+        // Initialize variables for creating ps-dropdown elements
+        var dropdownId;
+
+        var dropdown;
+        var display;
+        var icon;
+        var hidden;
+        var optionsWrapper;
+        var optionNode;
+
+        var i = 0;
+        var j = 0;
+        var k = 0;
+
+        // Loop through all select elements and convert to ps-dropdown elements
+        for (i = 0; i < selectArray.length; ++i) {
+
+            // Set the dropdownId if available; otherwise generate randomly
+            dropdownId = selectArray[i].id != '' ? selectArray[i].id : generateId(10);
+
+            // Retrieve selected option from select element
+            k = selectArray[i].options.selectedIndex;
+
+            // Create the dropdown-wrapper node
+            dropdown = document.createElement('div');
+            setAttributes(dropdown, {
+                'id': dropdownId + '-wrapper',
+                'class': selectArray[i].className,
+                'data-dropdown-id': dropdownId
+            });
+            dropdown.addEventListener('click', showOptions);
+
+            // Create the dropdown-display node
+            display = document.createElement('div');
+            setAttributes(display, {
+                'id': dropdownId + '-display',
+                'class': 'ps-dropdown-display'
+            });
+            display.innerHTML = selectArray[i].options[k].text;
+
+            // Create the dropdown-icon node
+            icon = document.createElement('div');
+            setAttributes(icon, {
+                'class': 'ps-dropdown-icon'
+            });
+            icon.innerHTML = '<i class="fa fa-' + options.icon + '"></i>';
+
+            // Create the dropdown-hidden node
+            hidden = document.createElement('input');
+            setAttributes(hidden, {
+                'type': 'hidden',
+                'id': dropdownId,
+                'name': selectArray[i].name,
+                'value': selectArray[i].options[k].value
+            });
+
+            // Create the dropdown-options-wrapper node
+            optionsWrapper = document.createElement('div');
+            setAttributes(optionsWrapper, {
+                'class': 'ps-dropdown-options-wrapper',
+                'style': {
+                    'left': '-' + getComputedStyle(dropdown,null).getPropertyValue('border-left-width')
+                }
+            });
+
+            // Loop through options and add to dropdown-options-wrapper
+            for (j = 0; j < selectArray[i].options.length; ++j) {
+                optionNode = document.createElement('div');
+                setAttributes(optionNode, {
+                    'class': 'ps-dropdown-option',
+                    'data-value': selectArray[i].options[j].value,
+                    'data-dropdown-id': dropdownId
+                });
+                optionNode.innerHTML = selectArray[i].options[j].text;
+                optionNode.addEventListener('click', clickOption);
+                optionsWrapper.appendChild(optionNode);
+            }
+
+            // Append all child nodes to the dropdown-wrapper node
+            dropdown.appendChild(display);
+            dropdown.appendChild(icon);
+            dropdown.appendChild(hidden);
+            dropdown.appendChild(optionsWrapper);
+
+            // Replace select with dropdown
+            selectArray[i].parentElement.replaceChild(dropdown, selectArray[i]);
+        }
+    };
+
+    // Function that executes when an option is clicked
+    function clickOption() {
+
+        // Retrieve dropdownId
+        var dropdownId = this.getAttribute('data-dropdown-id');
+
+        // Set hidden field to value and display field to text
+        document.querySelector('#' + dropdownId).value = this.getAttribute('data-value');
+        document.querySelector('#' + dropdownId + '-display').innerHTML = this.innerHTML;
+    }
+
+    // Function that displays the options-wrapper
+    function showOptions(e) {
+
+        // Stop click propagation to prevent immediate closure
+        e.stopPropagation();
+
+        // Retrieve options-wrapper
+        var optionsWrapper = document.querySelector('#' + e.currentTarget.id + ' > .ps-dropdown-options-wrapper');
+
+        // Display options-wrapper and add classes for fade in
+        optionsWrapper.style.display = 'block';
+        optionsWrapper.classList.remove('ps-dropdown-fade-out');
+        optionsWrapper.classList.add('ps-dropdown-fade-in');
+
+        // Remove the showOptions click event listener from the dropdown-wrapper element
+        e.currentTarget.removeEventListener('click', showOptions);
+
+        // Add a hideOptions click event listener to the window
+        window.addEventListener('click', hideOptions);
+    }
+
+    // Function that hides all open options-wrappers
+    function hideOptions(e) {
+
+        // Stop click propagation to preven reopening
+        e.stopPropagation();
+
+        // Retrieve array of all open options-wrappers
+        var optWrappers = document.querySelectorAll('.ps-dropdown-fade-in');
+
+        // Loop through options-wrappers and remove
+        for (var i = 0; i < optWrappers.length; ++i) {
+
+            // Retrieve option-wrapper
+            var opt = optWrappers[i];
+
+            // Adjust classes to fade out options-wrapper
+            opt.classList.remove('ps-dropdown-fade-in');
+            opt.classList.add('ps-dropdown-fade-out');
+
+            // Set timeout to remove option-wrapper after fade out is complete
+            setTimeout(function() {
+                opt.style.display = 'none';
+            }, 250);
+
+            // Add click event listner to dropdown-wrapper and remove from window
+            optWrappers[i].parentElement.addEventListener('click', showOptions);
+            window.removeEventListener('click', hideOptions);
+        }
+
+    }
+
+    // Helper function to generate a random ID
+    function generateId(length) {
+        var chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var result = '';
+
+        for (length; length > 0; --length) result += chars[Math.floor(Math.random() * chars.length)];
+        return result;
+    }
+
+    // Helper function to set the provided attributes for an element
     function setAttributes(elem, attr) {
         for (var prop in attr) {
             if (prop == 'style' && typeof attr[prop] === 'object') {
@@ -48,251 +226,5 @@ function PsDropdown() {
                 elem.setAttribute(prop, attr[prop]);
             }
         }
-    }
-
-    this.testconvert = function() {
-
-
-
-        var selectArray = document.querySelectorAll('.ps-dropdown');
-
-        var dropdown;
-        var dropdownId = '';
-        var className = '';
-        var dropdownOptions;
-
-        var display;
-        var hidden;
-        var optionsWrapper;
-        var optionNode;
-
-        var attr;
-
-        var i = 0;
-        var j = 0;
-        var k = 0;
-
-
-        for (i = 0; i < selectArray.length; ++i) {
-
-            dropdownId = selectArray[i].id != '' ? selectArray[i].id : generateId(10);
-            className = selectArray[i].className.replace('ps-dropdown', '');
-            k = selectArray[i].options.selectedIndex;
-
-            dropdown = document.createElement('div');
-            setAttributes(dropdown, {
-                'id': dropdownId + '-wrapper',
-                'class': className + ' ps-dropdown-wrapper',
-                'data-dropdown-id': dropdownId
-            });
-
-            display = document.createElement('div');
-            setAttributes(display, {
-                'id': dropdownId + '-display',
-                'class': 'ps-dropdown-display'
-            });
-            display.innerHTML = selectArray[i].options[k].text;
-
-            hidden = document.createElement('input');
-            setAttributes(hidden, {
-                'type': 'hidden',
-                'id': dropdownId,
-                'name': selectArray[i].name,
-                'value': selectArray[i].options[k].value
-            });
-
-            optionsWrapper = document.createElement('div');
-            setAttributes(optionsWrapper, {
-                'class': 'ps-dropdown-options-wrapper'
-            });
-
-            // Loop through options and add to optionsWrapper
-            for (j = 0; j < selectArray[i].options.length; ++j) {
-                optionNode = document.createElement('div');
-                setAttributes(optionNode, {
-                    'class': 'ps-dropdown-option',
-                    'data-value': selectArray[i].options[j].value,
-                    'data-dropdown-id': dropdownId
-                });
-                optionNode.innerHTML = selectArray[i].options[j].text;
-                optionsWrapper.appendChild(optionNode);
-            }
-
-            dropdown.appendChild(display);
-            dropdown.appendChild(hidden);
-            dropdown.appendChild(optionsWrapper);
-
-            console.log(dropdown);
-
-            /*
-            // Create dropdown
-            dropdown = '';
-
-            console.log('id: ' + dropdownId);
-
-
-            dropdown += '\n<div id="' + dropdownId + '-wrapper" class="ps-dropdown-wrapper" data-dropdown-id="' + dropdownId + '">';
-            dropdown += '\n   <div class="ps-dropdown-display" ';
-            dropdown += '\n         id="' + dropdownId + '-display"> ';
-            dropdown += '\n         ' + selectArray[i].options[k].text + '</div>';
-
-            dropdown += '\n   <input type="hidden"';
-            dropdown += '\n         class="ps-dropdown-hidden ' + className + '" ';
-            dropdown += '\n         id="' + dropdownId + '" ';
-            dropdown += '\n         name="' + selectArray[i].name + '" ';
-            dropdown += '\n         value="' + selectArray[i].options[k].value + '"/>';
-            dropdown += '\n   <div class="ps-dropdown-options-wrapper">';
-
-            // Loop through options and add to dropdown
-            for (j = 0; j < selectArray[i].options.length; ++j) {
-                dropdown += '\n       <div class="ps-dropdown-option" data-value="' + selectArray[i].options[j].value + '" data-dropdown-id="' + dropdownId + '">' + selectArray[i].options[j].text + '</div>';
-            }
-
-            dropdown += '\n   </div>';
-            dropdown += '\n</div>';
-
-            console.log('d: ' + dropdown);
-
-            */
-
-            // Replace select with dropdown
-            selectArray[i].parentElement.replaceChild(dropdown, selectArray[i]);
-
-            dropdownOptions = document.querySelector('#' + dropdownId + '-wrapper').querySelectorAll('.ps-dropdown-option');
-
-            for (j = 0; j < dropdownOptions.length; ++j) {
-                dropdownOptions[j].addEventListener('click', clickOption);
-            }
-
-            document.querySelector('#' + dropdownId + '-wrapper').addEventListener('click', showOptions);
-        }
-
-    };
-
-    function clickOption() {
-        var dropdownId = this.getAttribute('data-dropdown-id');
-
-        document.querySelector('#' + dropdownId).value = this.getAttribute('data-value');
-        document.querySelector('#' + dropdownId + '-display').innerHTML = this.innerHTML;
-    }
-
-    function showOptions(e) {
-        e.stopPropagation();
-
-        console.log(e.currentTarget);
-
-        document.querySelector('#' + e.currentTarget.id + ' > .ps-dropdown-options-wrapper').style.display = 'block';
-        document.querySelector('#' + e.currentTarget.id + ' > .ps-dropdown-options-wrapper').classList.remove('ps-dropdown-fade-out');
-        document.querySelector('#' + e.currentTarget.id + ' > .ps-dropdown-options-wrapper').classList.add('ps-dropdown-fade-in');
-        e.currentTarget.removeEventListener('click', showOptions);
-        window.addEventListener('click', hideOptions);
-    }
-
-    function hideOptions(e) {
-
-        e.stopPropagation();
-
-        var optionsWrappers = document.querySelectorAll('.ps-dropdown-fade-in');
-
-        for (var i = 0; i < optionsWrappers.length; ++i) {
-            optionsWrappers[i].classList.remove('ps-dropdown-fade-in');
-            optionsWrappers[i].classList.add('ps-dropdown-fade-out');
-
-            var opt = optionsWrappers[i];
-
-            setTimeout(function() {
-                console.log(opt);
-                opt.style.display = 'none';
-            }, 250);
-
-            optionsWrappers[i].parentElement.addEventListener('click', showOptions);
-            window.removeEventListener('click', hideOptions);
-        }
-
-    }
-
-    function generateId(length) {
-
-        var chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        var result = '';
-
-        for (length; length > 0; --length) result += chars[Math.floor(Math.random() * chars.length)];
-        return result;
-
-    }
-
-
-
-    // This function replaces all selects with a dropdown div containing
-    // a readonly text input and an unordered list of all options
-    this.convert = function() {
-
-        // Loop through each select with the class 'dropdown'
-        $("select.psDropdown").each(function() {
-
-            // Create a new dropdown DOM element
-            var dropdown = $('<div>', {
-                class: 'psDropdown'
-            });
-
-            // Append the text input and unordered list
-            dropdown.append('<input type="text" class="' + $(this).attr('class') + '" id="' + $(this).attr('id') + '" value="' + $(this).children("option").first().html() + '" readonly /><ul></ul>');
-
-            // Append the icon
-            if (psDropdown.options['icon'] == "arrow") {
-                dropdown.append('<div class="arrow"></div>');
-            } else if (psDropdown.options['icon'] == "chevron") {
-                dropdown.append('<div class="chevron"></div>');
-            }
-
-            // Create the options variable
-            var options = '';
-
-            // Populate the options variable by looping through select options
-            $(this).children("option").each(function() { options += '<li data-val="' + $(this).val() + '">' + $(this).html() + '</li>'; });
-
-            // Append the options to the unordered list
-            dropdown.children("ul").append(options);
-
-            // Replace the select element with the created dropdown element
-            $(this).replaceWith(dropdown);
-        });
-
-        // Execute the initialize function
-        initializeDropdowns();
-    }
-
-    // This function initializes all dropdowns
-    function initializeDropdowns() {
-
-        $(".psDropdown .arrow").click(function() {
-            $(this).siblings("input[type='text']").trigger("click");
-        });
-
-        // Set the click event for each dropdown
-        $(".psDropdown input[type='text']").click(function() {
-
-            if($(this).siblings("ul").is( ":hidden" )) {
-                // Set the list position below the text input and width equal to input width
-                $(this).siblings("ul").css({'top': $(this).outerHeight(true), 'left': 0, 'width': $(this).outerWidth()}).fadeIn(200);
-
-                // Set the click event for each list element
-                $(".psDropdown ul li").click(function() {
-                    $(this).parent().siblings("input[type='text']").val($(this).attr("data-val"));
-
-                    // Remove click event to prevent duplicates
-                    $(".psDropdown ul li").off("click");
-                });
-
-                // Set document mouseup function to close the list
-                $(document).mouseup(function (e)
-                {
-                    $(".psDropdown ul").fadeOut(200);
-
-                    // Remove click event to prevent duplicates
-                    $(document).off('mouseup');
-                });
-            }
-        });
     }
 }
