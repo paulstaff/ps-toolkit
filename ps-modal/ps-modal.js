@@ -52,7 +52,7 @@ function PsModal() {
         var modalHtml = '';
 
         // Add modal-back and modal-window
-        modalHtml += '<div id="ps-modal-back">';
+        modalHtml += '<div id="ps-modal-back" class="fadeIn">';
         modalHtml += '    <div id="ps-modal-window">';
 
         // Add header if applicable
@@ -82,9 +82,6 @@ function PsModal() {
 
         // Set width of modal-window
         document.querySelector('#ps-modal-window').style.width = options.width;
-
-        // Fade in modal window TODO: replace with non-jQuery
-        $('#ps-modal-back').fadeIn(150);
 
         // Initiate callback if applicable
         if (callback !== null && callback !== undefined) {
@@ -145,6 +142,11 @@ function PsModal() {
     };
 
     function modalClose() {
-        document.querySelector('body').removeChild(document.querySelector('#ps-modal-back'));
+        document.querySelector('#ps-modal-back').classList.remove('fadeIn');
+        document.querySelector('#ps-modal-back').classList.add('fadeOut');
+
+        setTimeout(function() {
+            document.querySelector('body').removeChild(document.querySelector('#ps-modal-back'));
+        }, 250);
     }
 }
