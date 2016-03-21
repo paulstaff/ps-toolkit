@@ -25,7 +25,7 @@
         }
 
         .test-text {
-            margin: 0 0 15px 0;
+            margin: 15px 0;
             max-width: 400px;
         }
 
@@ -53,6 +53,18 @@
 <body>
 
 <div class="test-container">
+    <div class="test-text">Changing this dropdown will change the icons used in the ps-dropdown elements (must be done before clicking convert):</div>
+    <div>
+        <select class="ps-dropdown test-input" id="iconSelect">
+            <option value="chevron-down">Chevron Down</option>
+            <option value="chevron-circle-down">Chevron Circle Down</option>
+            <option value="arrow-down">Arrow Down</option>
+            <option value="plus">Plus</option>
+        </select>
+    </div>
+    <div class="test-text">
+        <div class="test-btn" id="change-btn">Change Icon</div>
+    </div>
     <div class="test-text">Click the 'Convert' button below to run PS Dropdown. Click 'Test' to test the selection:</div>
     <div>
         <select class="ps-dropdown test-input">
@@ -68,18 +80,11 @@
             <option value="C">Option C</option>
         </select>
     </div>
-    <div class="test-text">Changing this dropdown will change the icons used:</div>
-    <div>
-        <select class="ps-dropdown test-input" id="iconSelect">
-            <option value="chevron-down">Chevron Down</option>
-            <option value="chevron-circle-down">Chevron Circle Down</option>
-            <option value="arrow-down">Arrow Down</option>
-            <option value="plus">Plus</option>
-        </select>
+    <div class="test-text">
+        <div class="test-btn" id="convert-btn">Convert</div>
+        <div class="test-btn" id="test-btn">Test</div>
     </div>
-    <div class="test-btn" id="convert-btn">Convert</div>
-    <div class="test-btn" id="change-btn">Change Icon</div>
-    <div class="test-btn" id="test-btn">Test</div>
+
 </div>
 
 <script type="text/javascript">

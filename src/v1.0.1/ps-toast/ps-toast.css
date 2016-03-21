@@ -1,0 +1,98 @@
+/*
+ *
+ *  Programmer: Paul Staff
+ *  Date: 2015.01.31
+ *  Edited: 2016.03.20
+ *
+ *  Copyright (c) 2014 - 2016, nplexity, LLC.  All Rights Reserved.
+ *  www.nplexity.com
+ *
+ *  ps-toast.css
+ *
+ *
+ *  This is the CSS stylesheet for ps-toast.js ps-toast elements.
+ *
+ *  To customize the toast elements, edit the custom style sections
+ *  of the #ps-toast-container and .ps-toast elements.
+ *
+ *  DO NOT EDIT the sections titled 'Required Styles', as these are
+ *  necessary to properly display the dropdown.
+ *
+ */
+
+
+/* ------------------------------------------------------------------ */
+/*   PS Toast CSS Styles                                              */
+/* ------------------------------------------------------------------ */
+
+#ps-toast-container {
+
+    /* Required Styles */
+    position: fixed;
+    display: block;
+    pointer-events: none;
+    z-index: 1500;
+
+    /* Add Custom Styles Here */
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    overflow-y: visible;
+
+}
+
+.ps-toast {
+
+    /* Required Styles */
+    pointer-events: none;
+    z-index: 1500;
+
+    /* Add Custom Styles Here */
+    width: 100vw;
+    padding: 10px;
+    border-top: 1px solid #BAE1F5;
+    background: rgba(186,225,245, 0.5);
+    color: #31708F;
+    text-align: center;
+
+}
+
+/* ------------------------------------------------------------------ */
+/*   DO NOT EDIT - Required for fade in/out                           */
+/* ------------------------------------------------------------------ */
+
+.ps-fade-in {
+
+    /* Required Styles */
+    animation-duration: .25s;
+    animation-fill-mode: forwards;
+    animation-name: ps-fade-in;
+}
+
+@keyframes ps-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.ps-fade-out {
+
+    /* Required Styles */
+    animation-duration: .25s;
+    animation-fill-mode: forwards;
+    animation-name: ps-fade-out;
+}
+
+@keyframes ps-fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}

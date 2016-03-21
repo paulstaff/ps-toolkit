@@ -21,11 +21,11 @@ Installation
 ### Instructions
 
 1. Download [psToast.zip](http://paulstaff.com/random/PSToolkit/src/psToast/psToast.zip).
-2. Unzip the contents and include the `psToast.js` and `psToast.css` files in the plugins folder for your project.
+2. Unzip the contents and include the `ps-toast.js` and `psToast.css` files in the plugins folder for your project.
 3. Include the following two lines in the `<head>` section of your HTML file (be sure to change file path):
 
 	```HTML
-	<script src="path/to/plugins/folder/psToast.js"></script>
+	<script src="path/to/plugins/folder/ps-toast.js"></script>
 	<link rel="stylesheet" href="path/to/plugins/folder/psToast.css">
 	```
 

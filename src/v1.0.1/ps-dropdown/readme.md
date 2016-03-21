@@ -25,7 +25,7 @@ Here is an alternative PS Dropdown select input:
 
 - Renamed classes and functions for consistency with other PS Toolkit components
 - Removed dependency on jQuery
--
+- Addressed compatibility issues
 
 
 Installation
@@ -124,6 +124,10 @@ div .ps-dropdown {
 
 }
 ```
+
+### Retrieving Dropdown Field Values
+
+Since the ID, name, and classes of each select element are converted
 
 ### PS Dropdown Options
 
