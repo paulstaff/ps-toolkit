@@ -1,7 +1,7 @@
 PS Modal - v1.0.1
 =================
 
-PS Modal provides an easy-to-use modal window that displays beautifully cross-browser (well, it might not have been tested in IE, but does anyone really use IE?).  Generating a modal with PSModal involves calling one function--it's that simple!
+PS Modal provides an easy-to-use modal window that displays beautifully cross-browser (well, it might not have been tested in IE, but does anyone really use IE?).  Generating a modal with PS Modal involves calling one function--it's that simple!
 
 ### Example
 
@@ -31,7 +31,7 @@ Installation
 
 ### Instructions
 
-1. Download [ps-modal.zip](http://paulstaff.com/random/PSToolkit/src/v1.0.1/ps-modal/ps-modal.zip).
+1. Download [ps-modal.zip](http://paulstaff.com/random/ps-toolkit/src/v1.0.1/ps-modal/ps-modal.zip).
 2. Unzip the contents and include the `ps-modal.js` and `ps-modal.css` files in the plugins folder for your project.
 3. Include the following two lines in the `<head>` section of your HTML file (be sure to change file path):
 
