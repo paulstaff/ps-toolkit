@@ -60,7 +60,7 @@ function PsDropdown() {
         var dropdown;
         var display;
         var icon;
-        var hidden;
+        //var hidden;
         var optionsWrapper;
         var optionNode;
 
@@ -83,9 +83,9 @@ function PsDropdown() {
                 'id': dropdownId,
                 'class': selectArray[i].className,
                 'data-dropdown-id': dropdownId,
-                'name': selectArray[i].name,
-                'value': selectArray[i].options[k].value
+                'name': selectArray[i].name
             });
+            dropdown.value = selectArray[i].options[k].value;
             dropdown.addEventListener('click', showOptions);
 
             // Create the dropdown-display node
@@ -116,10 +116,7 @@ function PsDropdown() {
             // Create the dropdown-options-wrapper node
             optionsWrapper = document.createElement('div');
             setAttributes(optionsWrapper, {
-                'class': 'ps-dropdown-options-wrapper',
-                'style': {
-                    'left': '-' + getComputedStyle(dropdown,null).getPropertyValue('border-left-width')
-                }
+                'class': 'ps-dropdown-options-wrapper'
             });
 
             // Loop through options and add to dropdown-options-wrapper
@@ -153,7 +150,7 @@ function PsDropdown() {
         var dropdownId = this.getAttribute('data-dropdown-id');
 
         // Set hidden field to value and display field to text
-        document.querySelector('#' + dropdownId).setAttribute('value', this.getAttribute('data-value'));
+        document.querySelector('#' + dropdownId).value = this.getAttribute('data-value');
         document.querySelector('#' + dropdownId + '-display').innerHTML = this.innerHTML;
     }
 

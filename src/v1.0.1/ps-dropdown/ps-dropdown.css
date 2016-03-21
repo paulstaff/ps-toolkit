@@ -22,30 +22,10 @@
  *
  */
 
-.psDropdown {
 
-    /* Required Styles */
-    position: relative;
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-
-    /* Add Custom Styles Here */
-    cursor: pointer;
-
-}
-
-.psDropdown input[type='text'] {
-
-    /* Add Custom Styles Here */
-    font-size: 14px;
-    font-family: Helvetica, Verdana, Arial, sans-serif;
-    padding: 8px 8px 5px 8px;
-    width: 200px;
-    border: 1px solid #CCCCCC;
-    border-radius: 3px;
-
-}
+/* ------------------------------------------------------------------ */
+/*   PS Dropdown CSS Styles                                           */
+/* ------------------------------------------------------------------ */
 
 div .ps-dropdown {
 
@@ -56,48 +36,80 @@ div .ps-dropdown {
     box-sizing: border-box;
 
     /* Add Custom Styles Here */
-    cursor: pointer;
     border: 1px solid #CCCCCC;
-    padding: 3px 8px;
-    text-align: left;
-    margin: 10px 0;
     border-radius: 2px;
-    box-shadow: inset 0px 0px 25px -20px rgba(0,0,0,0.75);
+    margin: 10px 0;
+    padding: 3px 8px;
+    cursor: pointer;
+    text-align: left;
+    box-shadow: inset 0 0 25px -20px rgba(0,0,0,0.75);
+
 }
 
 .ps-dropdown-display {
+
+    /* Required Styles */
     display: inline-block;
     order: 0;
+
+    /* Add Custom Styles Here */
+
 }
 
 .ps-dropdown-icon {
+
+    /* Required Styles */
     display: inline-block;
-    font-family: FontAwesome, Sans-Serif;
     order: 2;
+
+    /* Add Custom Styles Here */
+    font-family: FontAwesome, Sans-Serif; /* Editing this property also requires changes to the icon element in the ps-dropdown.js file */
+
 }
 
 .ps-dropdown-options-wrapper {
+
+    /* Required Styles */
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    border: 1px solid #CCCCCC;
     width: 100%;
     z-index: 1000;
+    order: 1;
+
+    /* Add Custom Styles Here */
     background: #FFFFFF;
+    border: 1px solid #CCCCCC;
     text-align: left;
-    order: 1    ;
+    margin-left: -1px;
+
 }
 
 .ps-dropdown-option {
-    padding: 5px;
+
+    /* Required Styles */
+    padding: 3px 8px;
+
+    /* Add Custom Styles Here */
+
 }
 
 .ps-dropdown-option:hover {
+
+    /* Add Custom Styles Here */
     background: #EEEEEE;
+
 }
 
+
+/* ------------------------------------------------------------------ */
+/*   DO NOT EDIT - Required for fade in/out                           */
+/* ------------------------------------------------------------------ */
+
 .ps-dropdown-fade-in {
+
+    /* Required Styles */
     animation-duration: .25s;
     animation-fill-mode: forwards;
     animation-name: ps-dropdown-fade-in;
@@ -114,6 +126,8 @@ div .ps-dropdown {
 }
 
 .ps-dropdown-fade-out {
+
+    /* Required Styles */
     animation-duration: .25s;
     animation-fill-mode: forwards;
     animation-name: ps-dropdown-fade-out;
@@ -128,136 +142,3 @@ div .ps-dropdown {
         opacity: 0;
     }
 }
-
-
-
-
-
-
-
-.psDropdown ul {
-
-    /* Required Styles */
-    position: absolute;
-    display: none;
-    list-style-type: none;
-    padding: 0;
-    z-index: 10;
-
-    /* Add Custom Styles Here */
-    border: 1px solid #CCCCCC;
-    box-shadow: 2px 2px 3px 0 #666666, -2px 2px 3px 0 #666666;
-    margin: 0;
-    background: #FFFFFF;
-    color: #333333;
-    text-align: left;
-    font-size: 14px;
-    font-family: Helvetica, Verdana, Arial, sans-serif;
-
-}
-
-.psDropdown ul li {
-
-    /* Required Styles */
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-        -moz-box-sizing: border-box;
-
-    /* Add Custom Styles Here */
-    padding: 5px 8px 3px 8px;
-    cursor: pointer;
-}
-
-.psDropdown ul li:hover {
-
-    /* Add Custom Styles Here */
-    background: #DDDDDD;
-
-}
-
-.psDropdown ul li .val {
-
-    /* Required Styles */
-    display: none;
-
-}
-
-.psDropdown .arrow {
-
-    /* Required Styles */
-    position: absolute;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-    width: 0;
-    height: 0;
-
-    /* Add Custom Styles Here */
-    right: 10px;  /* Controls offset from right side of input */
-    border-top: 7px solid #000000;  /* Adjust the border width to control arrow size */
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-
-}
-
-.psDropdown .chevron {
-
-    /* Required Styles */
-    position: absolute;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-
-    /* Add Custom Styles Here */
-    right: 10px;  /* Controls offset from right side of input */
-    height: 3px;
-    width: 15px;
-
-}
-
-.psDropdown .chevron:before {
-
-    /* Required Styles */
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 51%;
-
-    /* Add Custom Styles Here */
-    background: #000000;  /* Color for left side of chevron */
-    -webkit-transform: skew(0deg, 20deg);  /* Adjust the left skew to make the angle of inclination steeper or shallower */
-    -moz-transform: skew(0deg, 20deg);
-    -ms-transform: skew(0deg, 20deg);
-    -o-transform: skew(0deg, 20deg);
-    transform: skew(0deg, 20deg);
-
-}
-
-.psDropdown .chevron:after {
-
-    /* Required Styles */
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 50%;
-
-    /* Add Custom Styles Here */
-    background: #000000;  /* Color for left side of chevron */
-    -webkit-transform: skew(0deg, -20deg);  /* Adjust the left skew to make the angle of inclination steeper or shallower */
-    -moz-transform: skew(0deg, -20deg);
-    -ms-transform: skew(0deg, -20deg);
-    -o-transform: skew(0deg, -20deg);
-    transform: skew(0deg, -20deg);
-
-}​

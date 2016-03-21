@@ -1,7 +1,7 @@
-PS Dropdown - v0.9.3
+PS Dropdown - 1.0.1
 ====================
 
-PS Dropdown provides an alternative to standard HTML select elements. It converts all select elements with the class `psDropdown` to custom `psDropdown` elements that consist of a readonly text element and a list of options. To use this javascript plugin, simply include the `psDropdown.js` and `psDropdown.css` files and add the `psDropdown` class to all select elements.
+PS Dropdown provides an alternative to standard HTML select elements. It converts all select elements with the class `ps-dropdown` to custom `ps-dropdown` elements that consist of a readonly div element and a list of options. To use this javascript plugin, simply include the `ps-dropdown.js` and `ps-dropdown.css` files and add the `ps-dropdown` class to all select elements.
 
 ### Example
 
@@ -13,9 +13,9 @@ Here is a standard select input:
     <option value="3">Option the Third</option>
 </select>
 
-Here is an alternative psDropdown select input:
+Here is an alternative PS Dropdown select input:
 
-<select class="psDropdown">
+<select class="ps-dropdown">
     <option value="1">This is an Option</option>
     <option value="2">Another Option</option>
     <option value="3">Option the Third</option>
@@ -23,10 +23,9 @@ Here is an alternative psDropdown select input:
 
 ### Version Updates
 
-- Added default arrow dropdown icon to make display look more like traditional select element
-- Added options to set dropdown icon as a chevron or no icon
-- Fixed bug that closed and then re-opened dropdown list upon clicking input
 - Renamed classes and functions for consistency with other PS Toolkit components
+- Removed dependency on jQuery
+-
 
 
 Installation
@@ -35,94 +34,120 @@ Installation
 
 ### Prerequisites
 
-- jQuery 2.0+ is required to run all PSToolkit plugins
+- The icons used by PS Dropdown elements require the FontAwesome font to be installed. It is included with the download files.
 
 ### Instructions
 
-1. Download [psDropdown.zip](http://paulstaff.com/random/PSToolkit/src/psDropdown/psDropdown.zip).
-2. Unzip the contents and include the `psDropdown.js` and `psDropdown.css` files in the plugins folder for your project.
-3. Include the following two lines in the `<head>` section of your HTML file (be sure to change file path):
+1. Download [ps-dropdown.zip](http://paulstaff.com/random/PSToolkit/src//v1.0.1/ps-ropdown/ps-ropdown.zip).
+2. Unzip the contents and include the `ps-dropdown.js` and `ps-dropdown.css` files as well as the `fontawesome` folder in the plugins folder for your project.
+3. Include the following three lines in the `<head>` section of your HTML file (be sure to change file path):
 
 	```HTML
 	<script src="path/to/plugins/folder/psDropdown.js"></script>
 	<link rel="stylesheet" href="path/to/plugins/folder/psDropdown.css">
+	<link rel="stylesheet" type="text/css" href="path/to/plugins/folder/font-awesome-4.5.0/css/font-awesome.min.css">
 	```
 
-4. Add the class `psDropdown` to all select elements that you would like to convert:
+4. Add the class `ps-dropdown` to all select elements that you would like to convert:
 
 	```HTML
-	<select class="psDropdown">
+	<select class="ps-dropdown">
 		<option value="1">This is an Option</option>
         <option value="2">Another Option</option>
         <option value="3">Option the Third</option>
     </select>           
 	```
 
-5. Optionally, you can call `psDropdown.convert()` at any point to re-render all select inputs on the page as dropdown inputs (use this after inserting a new select element in the DOM).  This does not affect select inputs already rendered as dropdowns.
+5. Call the function `psDropdown.setOptions()` if any changes need to be made to the default options.
+
+6. Call the function `psDropdown.convert()` once the page has loaded to convert select elements.
+
+7. Optionally, you can call `psDropdown.convert()` at any point to re-render all select inputs on the page as dropdown inputs (use this after inserting a new select element in the DOM).  This does not affect select inputs already rendered as dropdowns.
 
 
 Using PS Dropdown
 ----------------
 
-### Creating `psDropdown` Elements
+### Creating `ps-dropdown` Elements
 
-To create a `psDropdown` element, simply add the class `psDropdown` to a standard HTML `select` element:
+To create a `ps-dropdown` element, simply add the class `ps-dropdown` to a standard HTML `select` element:
 
 ```HTML
-<select id="mySelectID" class="psDropdown mySelectClass">
+<select id="mySelectID" name="mySelectName" class="ps-dropdown mySelectClass">
 	<option value="1">This is an Option</option>
     <option value="2">Another Option</option>
     <option value="3">Option the Third</option>
 </select>
 ```
 
-When `psDropdown.convert()` is run, the `select` element will be replaced with a `psDropdown` element that contains a styled text `input` and and a list of all options. Any other classes and IDs associated with the `select` element will be retained and associated with the new `psDropdown` element. The value of each option will be associated with the `data-val` attribute for each list item while the text of the option will be the text for the list item:
+When `psDropdown.convert()` is called, the `select` element will be replaced with a `ps-dropdown` element that contains a styled `div` and and a list of all options. Any other classes, name, and ID associated with the `select` element will be retained and associated with the new `ps-dropdown` element. The value of each option will be associated with the `data-value` attribute for each list item while the text of the option will be the text for the list item. A complete `ps-dropdown` element is below:
 
 ```HTML
-<div class="psDropdown">
-	<input type="text" id="mySelectID" class="mySelectClass" readonly />
-	<ul>
-		<li data-val="1">This is an Option</li>
-		<li data-val="2">Another Option</li>
-		<li data-val="3">Option the Third</li>
-	</ul>
+<div id="mySelectID" name="mySelectName" class="ps-dropdown mySelectClass">
+	<div id="mySelectID-display" class="ps-dropdown-display">This is an Option</div>
+	<div class="ps-dropdown-icon">
+	    <i class="fa fa-chevron-down"></i>
+	</div>
+	<div class="ps-dropdown-options-wrapper">
+	    <div class="ps-dropdown-option" data-value="1" data-dropdown-id="mySelectId">This is an Option</div>
+	    <div class="ps-dropdown-option" data-value="2" data-dropdown-id="mySelectId">Another Option</div>
+	    <div class="ps-dropdown-option" data-value="3" data-dropdown-id="mySelectId">Option the Third</div>
+	</div>
 </div>
 ```
 
-### Editing Your `psDropdown` Elements
+If the select element does not have an associated ID, a random ID will be generated for the ps-dropdown element. Please ensure that any ID associated with the select element is actually unique (this is standards compliant, so there should be no issue with this).
 
-As explained above, each `psDropdown` element retain all classes/ids associated with the original `select` element, so you are free to style your `psDropdown` elements using custom CSS classes.
+### Editing Your `ps-dropdown` Elements
 
-Additionally, the `psDropdown.css` file contains a number of different style tags that control the display of each `psDropdown` element, some of which are required to properly render each `psDropdown` element and others that are open for user customization.  Sections that are required are clearly marked with a **Required Styles** comment while sections that are editable are marked with an **Add Custom Styles Here** comment.  (Technically, all style sections are editable, just make sure you know what you're doing first).  An example of the `psDropdown` list element CSS is below:
+As explained above, each `ps-dropdown` element retains all classes/ids associated with the original `select` element, so you are free to style your `ps-dropdown` elements using custom CSS classes.
+
+Additionally, the `ps-dropdown.css` file contains a number of different style tags that control the display of each `ps-dropdown` element, some of which are required to properly render each `ps-dropdown` element and others that are open for user customization.  Sections that are required are clearly marked with a **Required Styles** comment while sections that are editable are marked with an **Add Custom Styles Here** comment.  (Technically, all style sections are editable, just make sure you know what you're doing first).  An example of the `ps-dropdown` element CSS is below:
 
 ```CSS
-.psDropdown ul li {
+div .ps-dropdown {
 
-   	/* Required Styles */
-   	display: block;
-   	width: 100%;
-   	box-sizing: border-box;
-       	-moz-box-sizing: border-box;
+    /* Required Styles */
+    display: inline-flex;
+    justify-content: space-between;
+    position: relative;
+    box-sizing: border-box;
 
-   	/* Add Custom Styles Here */
-   	padding: 5px 8px 3px 8px;
-   	cursor: pointer;
+    /* Add Custom Styles Here */
+    border: 1px solid #CCCCCC;
+    border-radius: 2px;
+    margin: 10px 0;
+    padding: 3px 8px;
+    cursor: pointer;
+    text-align: left;
+    box-shadow: inset 0 0 25px -20px rgba(0,0,0,0.75);
+
 }
 ```
 
-### Dropdown Input Icon
+### PS Dropdown Options
 
-By default, dropdown elements contain a downward facing arrow to indicate to the user that the element is clickable and will open into a dropdown list (similar to traditional select elements).
+In addition to editing the style of elements with the CSS page, there are standard options for dropdown elements that may be adjusted before the dropdown elements are rendered. These options are adjusted by passing in an object of key-value pairs to the `psDropdown.setOptions()` function. The options currently available to edit are as follows:
+
+```Javascript
+psDropdown.setOptions({
+    'icon': 'chevron-down'
+});
+```
+
+#### Dropdown Icon
+
+By default, dropdown elements contain a downward facing chevron to indicate to the user that the element is clickable and will open into a dropdown list (similar to traditional select elements).
+
+This chevron is an icon rendered from the FontAwesome font and can be changed to any of the FontAwesome icons by setting the `icon` property of the options object. A full list of the icons available for use can be found on the [FontAwesome website](https://fortawesome.github.io/Font-Awesome/icons/). Simply use the name of the desired icon as the `icon` property:
 
 In place of the the default arrow, you also have the option to display a chevron or no icon at all.  To do so, simply adjust the `icon` property of the `options` object in `psDropdown.js`:
 
 ```Javascript
-this.options = {
-        icon: "arrow"  // Defaults to "arrow".  Change this to "chevron" to display a chevron or "none" to not display an icon.  Edit icon styles in psDropdown.css
-    }
+psDropdown.setOptions({
+    'icon': 'chevron-down'
+});
 ```
-
-To edit the icon style, make adjustments to the `.psDropdown .arrow` or `.psDropdown .chevron` classes in `psDropdown.css`.
 
 
 Developed By
@@ -134,7 +159,7 @@ Developed By
 License
 -------
 
-Copyright (c) 2014 Paul Staff
+Copyright (c) 2014-2016 Paul Staff
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
