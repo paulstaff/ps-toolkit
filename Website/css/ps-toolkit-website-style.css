@@ -263,15 +263,15 @@ a:hover {
 }
 
 #examplePSDropdown {
-    background: url("../img/PSDropdown.jpg") no-repeat 50% 50%;
+    background-image: url("../img/PSDropdown.jpg");
 }
 
 #examplePSModal {
-    background: url("../img/PSModal.jpg") no-repeat 50% 50%;
+    background-image: url("../img/PSModal.jpg");
 }
 
 #examplePSToast {
-    background: url("../img/PSToast.jpg") no-repeat 50% 50%;
+    background-image: url("../img/PSToast.jpg");
 }
 
 .btn {

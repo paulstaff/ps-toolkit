@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PS Modal Test</title>
+
+    <link rel="stylesheet" type="text/css" href="ps-modal.css">
+    <script type="text/javascript" src="ps-modal.js"></script>
+    <script type="text/javascript" src="ps-modal.js"></script>
+
+    <style type="text/css">
+
+        * { margin: 0; padding: 0; }
+
+        body {
+            font-family: Helvetica Neue, Helvetica, Arial, Sans-Serif;
+        }
+
+        .test-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .test-text {
+            margin: 0 0 15px 0;
+        }
+
+        .test-btn {
+            display: inline-block;
+            background-color: #2A66AA;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .test-btn:hover {
+            background-color: #589CE8;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="test-container">
+    <div class="test-text">Click the button to open a PS Modal window:</div>
+    <div class="test-btn">Open Modal</div>
+</div>
+
+<script type="text/javascript">
+
+    document.querySelector('.test-btn').addEventListener('click', function() {
+
+        var options = psModal.getStandardOptions();
+
+        options.title = 'This is a Title';
+        options.header = true;
+        options.closeModalBack = true;
+        options.displayMethod = 'flip';
+
+        options.content = '';
+        options.content += '<div class="ps-modal-item">This is content for the modal window. The button below is styled according to the CSS of the page in which it is found.</div>';
+        options.content += '<div id="ps-modal-footer">';
+        options.content += '    <div class="test-btn" id="modal-close-btn">Close</div>';
+        options.content += '    <div class="test-btn" id="modal-update-btn">Update</div>';
+        options.content += '</div>';
+
+        var callback = function() {
+            document.querySelector('#modal-close-btn').addEventListener('click', function() {
+                psModal.close();
+            });
+
+            document.querySelector('#modal-update-btn').addEventListener('click', function() {
+                var options = psModal.getStandardOptions();
+
+                options.title = 'This is a New Title';
+                options.header = false;
+                options.closeModalBack = false;
+
+                options.content = '';
+                options.content += '<div class="ps-modal-item">This is an updated modal window, without a header and with the modal background close option set to false.</div>';
+                options.content += '<div id="ps-modal-footer">';
+                options.content += '    <div class="test-btn" id="modal-close-btn">Close</div>';
+                options.content += '</div>';
+
+                var callback = function() {
+                    document.querySelector('#modal-close-btn').addEventListener('click', function() {
+                        psModal.close();
+                    });
+                };
+
+                psModal.update(options, callback);
+            });
+        };
+
+        psModal.open(options, callback);
+    });
+
+</script>
+
+</body>
+</html>

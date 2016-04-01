@@ -48,7 +48,7 @@ function navigate(page, back) {
             loadMarkdown("lib/about.md", null);
             break;
         case "download":
-            loadContent("src/psToolkit.zip", null);
+            loadContent("src/v1.0.1/ps-toolkit/ps-toolkit.zip", null);
             break;
         case "delaunay":
             loadContent("lib/delaunay.html", function() {
@@ -57,45 +57,56 @@ function navigate(page, back) {
                 });
             });
             break;
-        case "psDropdown":
-            loadMarkdown("src/psDropdown/readme.md", function() {
-                loadCSS("src/psDropdown/psDropdown.css");
-                $.getScript("src/psDropdown/psDropdown.js", function() {
+        case "ps-dropdown":
+            loadMarkdown("src/v1.0.1/ps-dropdown/readme.md", function() {
+                loadCSS("src/v1.0.1/ps-dropdown/ps-dropdown.css");
+                loadCSS("src/v1.0.1/ps-dropdown/font-awesome-4.5.0/css/font-awesome.min.css");
+                $.getScript("src/v1.0.1/ps-dropdown/ps-dropdown.js", function() {
+                    psDropdown = new PsDropdown();
                     psDropdown.convert();
                 });
-                setDownloadBtn("src/psDropdown/psDropdown.zip");
+                setDownloadBtn("src/v1.0.1/ps-dropdown/ps-dropdown.zip");
             });
             break;
-        case "psModal":
-            loadMarkdown("src/psModal/readme.md", function() {
-                loadCSS("src/psModal/psModal.css");
-                $.getScript("src/psModal/psModal.js", function() {
+        case "ps-modal":
+            loadMarkdown("src/v1.0.1/ps-modal/readme.md", function() {
+                loadCSS("src/v1.0.1/ps-modal/ps-modal.css");
+                $.getScript("src/v1.0.1/ps-modal/ps-modal.js", function() {
                     $("#exampleBtn").click(function() {
-                        var title = "Test Modal Title";
+                        psModal = new PsModal();
 
-                        var content =  	'<div class="psModalItem">' +
-                                        '   <div>This is an item in the modal window.  As you can see, the modal window retains CSS styles present in your project, such as font and HTML elements like the button below.</div>' +
-                                        '</div> ' +
-                                        '<div id="psModalFooter">' +
-                                        '   <div class="btn" onclick="psModal.close()">Close Modal</div>' +
-                                        '</div> ';
+                        var options = psModal.getStandardOptions();
 
-                        var options = {
-                            width: 800
+                        options.title = 'This is a Title';
+                        options.header = true;
+                        options.closeModalBack = true;
+
+                        options.content = '';
+                        options.content += '<div class="ps-modal-item">This is content for the modal window. The button below is styled according to the CSS of the page in which it is found.</div>';
+                        options.content += '<div id="ps-modal-footer">';
+                        options.content += '    <div class="btn" id="modal-close-btn">Close</div>';
+                        options.content += '</div>';
+
+                        var callback = function() {
+                            document.querySelector('#modal-close-btn').addEventListener('click', function() {
+                                psModal.close();
+                            });
                         };
 
-                        psModal.open(title, content, options);
+                        psModal.open(options, callback);
                     });
                 });
-                setDownloadBtn("src/psModal/psModal.zip");
+                setDownloadBtn("src/v1.0.1/ps-modal/ps-modal.zip");
             });
 
             break;
-        case "psToast":
-            loadMarkdown("src/psToast/readme.md", function() {
-                loadCSS("src/psToast/psToast.css");
-                $.getScript("src/psToast/psToast.js");
-                setDownloadBtn("src/psToast/psToast.zip");
+        case "ps-toast":
+            loadMarkdown("src/v1.0.1/ps-toast/readme.md", function() {
+                loadCSS("src/v1.0.1/ps-toast/ps-toast.css");
+                $.getScript("src/v1.0.1/ps-toast/ps-toast.js", function() {
+                    psToast = new PsToast();
+                });
+                setDownloadBtn("src/v1.0.1/ps-toast/ps-toast.zip");
             });
             break;
         default:

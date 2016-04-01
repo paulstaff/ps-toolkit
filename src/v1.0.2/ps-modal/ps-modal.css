@@ -173,3 +173,44 @@
         opacity: 0;
     }
 }
+
+.ps-modal-flip-in {
+    animation-duration: .25s;
+    animation-fill-mode: forwards;
+    transform-origin: 0% 0%;
+    animation-name: ps-modal-flip-in;
+}
+
+@keyframes ps-modal-flip-in {
+    from {
+        opacity: 0;
+        transform: perspective(600px) rotateX(-70deg) translate(-50%, -50%);
+    }
+
+    to {
+        opacity: 1;
+        transform: perspective(600px) rotateX(0deg) translate(-50%, -50%);
+    }
+}
+
+.ps-modal-flip-out {
+    animation-duration: .25s;
+    animation-fill-mode: forwards;
+    transform-origin: 0% 0%;
+    animation-name: ps-modal-flip-out;
+}
+
+@keyframes ps-modal-flip-out {
+    from {
+        opacity: 1;
+        transform: perspective(1000px) rotateX(0deg) translate(-50%, -50%);
+    }
+
+    to {
+        opacity: 0;
+        transform: perspective(1000px) rotateX(-70deg) translate(-50%, -50%);
+    }
+}
+
+
+

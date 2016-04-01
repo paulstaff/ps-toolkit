@@ -1,0 +1,387 @@
+/*
+ *
+ *  Programmer: Paul Staff
+ *  Created: 2015.01.31
+ *  Edited: 2016.03.21
+ *
+ *  Copyright (c) 2014 - 2016, nplexity, LLC.  All Rights Reserved.
+ *  www.nplexity.com
+ *
+ *  ps-dropdown.css
+ *
+ *  v 1.0.1
+ *
+ *
+ *  This is the CSS stylesheet for ps-toolkit.js components.
+ *
+ *  DO NOT EDIT the sections titled 'Required Styles', as these are
+ *  necessary to properly display the component.
+ *
+ *
+ */
+
+/*
+ * =====================================================================
+ *  PS Dropdown Styles
+ * =====================================================================
+ */
+
+div .ps-dropdown {
+
+    /* Required Styles */
+    display: inline-flex;
+    justify-content: space-between;
+    position: relative;
+    box-sizing: border-box;
+
+    /* Add Custom Styles Here */
+    border: 1px solid #CCCCCC;
+    border-radius: 2px;
+    margin: 10px 0;
+    padding: 3px 8px;
+    cursor: pointer;
+    text-align: left;
+    box-shadow: inset 0 0 25px -20px rgba(0,0,0,0.75);
+
+}
+
+.ps-dropdown-display {
+
+    /* Required Styles */
+    display: inline-block;
+    order: 0;
+
+    /* Add Custom Styles Here */
+
+}
+
+.ps-dropdown-icon {
+
+    /* Required Styles */
+    display: inline-block;
+    order: 2;
+
+    /* Add Custom Styles Here */
+    font-family: FontAwesome, Sans-Serif; /* Editing this property also requires changes to the icon element in the ps-dropdown.js file */
+
+}
+
+.ps-dropdown-options-wrapper {
+
+    /* Required Styles */
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    order: 1;
+
+    /* Add Custom Styles Here */
+    background: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    text-align: left;
+    margin-left: -1px;
+
+}
+
+.ps-dropdown-option {
+
+    /* Required Styles */
+    padding: 3px 8px;
+
+    /* Add Custom Styles Here */
+
+}
+
+.ps-dropdown-option:hover {
+
+    /* Add Custom Styles Here */
+    background: #EEEEEE;
+
+}
+
+
+/*
+ * =====================================================================
+ *  DO NOT EDIT - Required for Fade In/Out
+ * =====================================================================
+ */
+
+.ps-dropdown-fade-in {
+
+    /* Required Styles */
+    animation-duration: .25s;
+    animation-fill-mode: forwards;
+    animation-name: ps-dropdown-fade-in;
+}
+
+@keyframes ps-dropdown-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.ps-dropdown-fade-out {
+
+    /* Required Styles */
+    animation-duration: .25s;
+    animation-fill-mode: forwards;
+    animation-name: ps-dropdown-fade-out;
+}
+
+@keyframes ps-dropdown-fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+
+/*
+ * =====================================================================
+ *  PS Modal Styles
+ * =====================================================================
+ */
+
+
+#ps-modal-back {
+
+    /* Required Styles */
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1999;
+
+    /* Add Custom Styles Here */
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.25);
+
+}
+
+#ps-modal-window {
+
+    /* Required Styles */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2000;
+
+    /* Add Custom Styles Here */
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 2px;
+    box-shadow: 10px 10px 35px -5px rgba(0,0,0,0.50);
+
+}
+
+#ps-modal-header {
+
+    /* Required Styles */
+    position: relative;
+
+    /* Add Custom Styles Here */
+    background: none repeat scroll 0 0 #F9F9F9;
+    border-bottom: 1px solid #CCCCCC;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 15px 20px 12px;
+
+}
+
+#ps-modal-header-title, #ps-modal-header-close {
+
+    /* Required Styles */
+    font-size: 16px;
+    line-height: 24px;
+
+    /* Add Custom Styles Here */
+
+}
+
+#ps-modal-header-title {
+
+    /* Add Custom Styles Here */
+    font-weight: bold;
+
+}
+
+#ps-modal-header-close {
+
+    /* Required Styles */
+    font-size: 24px;
+    font-weight: 500;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    cursor: pointer;
+
+    /* Add Custom Styles Here */
+    color: #000000;
+
+}
+
+#ps-modal-header-close:hover {
+
+    /* Add Custom Styles Here */
+    color: #C62626;
+
+}
+
+#ps-modal-body {
+
+    /* Required Styles */
+    overflow-y: scroll;
+    max-height: 85vh;
+
+    /* Add Custom Styles Here */
+    padding: 10px 20px;
+
+}
+
+.ps-modal-item {
+
+    /* Add Custom Styles Here */
+    margin: 10px 0;
+
+}
+
+#ps-modal-footer {
+
+    /* Add Custom Styles Here */
+    margin-top: 25px;
+    border-top: 1px solid #CCCCCC;
+    padding: 18px 0 8px 0;
+
+}
+
+
+/*
+ * =====================================================================
+ *  DO NOT EDIT - Required for Fade In/Out
+ * =====================================================================
+ */
+
+
+.ps-modal-fade-in {
+    animation-duration: .25s;
+    animation-fill-mode: forwards;
+    animation-name: ps-modal-fade-in;
+}
+
+@keyframes ps-modal-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.ps-modal-fade-out {
+    animation-duration: .25s;
+    animation-fill-mode: forwards;
+    animation-name: ps-modal-fade-out;
+}
+
+@keyframes ps-modal-fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+
+/*
+ * =====================================================================
+ *  PS Toast Styles
+ * =====================================================================
+ */
+
+#ps-toast-container {
+
+    /* Required Styles */
+    position: fixed;
+    display: block;
+    pointer-events: none;
+    z-index: 1500;
+
+    /* Add Custom Styles Here */
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    overflow-y: visible;
+
+}
+
+.ps-toast {
+
+    /* Required Styles */
+    pointer-events: none;
+    z-index: 1500;
+
+    /* Add Custom Styles Here */
+    width: 100vw;
+    padding: 10px;
+    border-top: 1px solid #BAE1F5;
+    background: rgba(186,225,245, 0.5);
+    color: #31708F;
+    text-align: center;
+
+}
+
+
+/*
+ * =====================================================================
+ *  DO NOT EDIT - Required for Fade In/Out
+ * =====================================================================
+ */
+
+
+.ps-fade-in {
+
+    /* Required Styles */
+    animation-duration: .25s;
+    animation-fill-mode: forwards;
+    animation-name: ps-fade-in;
+}
+
+@keyframes ps-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.ps-fade-out {
+
+    /* Required Styles */
+    animation-duration: .25s;
+    animation-fill-mode: forwards;
+    animation-name: ps-fade-out;
+}
+
+@keyframes ps-fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}

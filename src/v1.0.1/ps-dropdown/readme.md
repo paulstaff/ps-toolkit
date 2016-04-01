@@ -38,7 +38,7 @@ Installation
 
 ### Instructions
 
-1. Download [ps-dropdown.zip](http://paulstaff.com/random/PSToolkit/src//v1.0.1/ps-ropdown/ps-ropdown.zip).
+1. Download [ps-dropdown.zip](http://paulstaff.com/random/ps-toolkit/src/v1.0.1/ps-dropdown/ps-dropdown.zip).
 2. Unzip the contents and include the `ps-dropdown.js` and `ps-dropdown.css` files as well as the `fontawesome` folder in the plugins folder for your project.
 3. Include the following three lines in the `<head>` section of your HTML file (be sure to change file path):
 
