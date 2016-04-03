@@ -2,7 +2,7 @@
  *
  *  Developer: Paul Staff
  *  Date: 2014.05.16
- *  Edited: 2016.03.19
+ *  Edited: 2016.04.03
  *
  *  Copyright (c) 2014 - 2016, nplexity, LLC.  All Rights Reserved.
  *  www.nplexity.com
@@ -16,7 +16,7 @@
  *  will display a beautifully formatted modal window.  Customize the
  *  look and feel of the modal window with the ps-modal.css file.
  *
- *  ps-modal requires jQuery and ps-modal.css to function correctly.
+ *  ps-modal requires ps-modal.css to function correctly.
  *
  */
 
@@ -29,6 +29,7 @@ function PsModal() {
 
     // Set the standard options
     var standardOptions = {
+        'location': 'body',
         'header': true,
         'closeModalBack': true,
         'displayMethod': 'fade',
@@ -82,7 +83,7 @@ function PsModal() {
         modalHtml += '</div>';
 
         // Insert modalHtml into the DOM
-        document.querySelector('body').insertAdjacentHTML('beforeend', modalHtml);
+        document.querySelector(options.location).insertAdjacentHTML('beforeend', modalHtml);
 
         // Add click event to header close button if applicable
         if (options.header == true) { document.querySelector('#ps-modal-header-close').addEventListener('click', psModal.close); }
