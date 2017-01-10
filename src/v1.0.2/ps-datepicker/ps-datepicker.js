@@ -19,6 +19,8 @@
 
 // Initiate ps-datepicker upon document fully loaded
 document.addEventListener("DOMContentLoaded", function(e) {
+    console.log('initiated');
+
     window.psDatepicker = new PsDatepicker();
 
     psDatepicker.convert();
@@ -28,6 +30,8 @@ function PsDatepicker () {
 
     // Function to convert all input elements with the class of 'ps-datepicker' to ps-datepicker elements
     this.convert = function() {
+
+        console.log('converting...');
 
         // Retrieve all input elements with the class of 'ps-datepicker'
         var inputArray = document.querySelectorAll('input.ps-datepicker');

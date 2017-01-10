@@ -286,3 +286,33 @@ a:hover {
 .btn:hover {
     background-color: #2A66AA;
 }
+
+.exampleInput input {
+    font-size: 1em;
+    text-align: center;
+    padding: .2em .4em;
+    display: inline-block;
+    width: 150px;
+}
+
+.d-left:hover,
+.d-right:hover {
+
+    /* Add Custom Styles Here */
+    background: #2a66aa;
+    color: #ffffff;
+}
+
+.d-cell:hover {
+
+    /* Add Custom Styles Here */
+    background: #2a66aa;
+    color: #ffffff;
+}
+
+.d-selected {
+
+    /* Add Custom Styles Here */
+    background: #589ce8;
+    color: #ffffff;
+}

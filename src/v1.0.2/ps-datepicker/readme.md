@@ -7,7 +7,7 @@ PS Datepicker provides a datepicker popup that allows the user to select a date 
 
 Click the input below to open an example datepicker and select a date:
 
-<div class="test-input"><input type="text" class="ps-datepicker" /></div>
+<div class="exampleInput"><input type="text" class="ps-datepicker" /></div>
 
 ### Version Updates
 

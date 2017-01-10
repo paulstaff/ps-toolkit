@@ -109,6 +109,16 @@ function navigate(page, back) {
                 setDownloadBtn("src/v1.0.1/ps-toast/ps-toast.zip");
             });
             break;
+        case "ps-datepicker":
+            loadMarkdown("src/v1.0.2/ps-datepicker/readme.md", function() {
+                loadCSS("src/v1.0.2/ps-datepicker/ps-datepicker.css");
+                $.getScript("src/v1.0.2/ps-datepicker/ps-datepicker.js", function() {
+                    psDatepicker = new PsDatepicker();
+                    psDatepicker.convert();
+                });
+                setDownloadBtn("src/v1.0.2/ps-datepicker/ps-datepicker.zip");
+            });
+            break;
         default:
             loadContent("lib/home.html", null);
             break;
