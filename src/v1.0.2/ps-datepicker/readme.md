@@ -35,6 +35,7 @@ Installation
 	```
 
 5. Add the `ps-datepicker` class to any input that you would like to convert to a datepicker.
+6. All inputs with the `ps-datepicker` class should be converted to datepickers on page load, but if you need to add new datepickers, simply call `psDatepicker.convert()`.
 
 
 Using PS Datepicker
