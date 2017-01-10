@@ -6,13 +6,13 @@
  * Copyright (c) 2014 - 2017, nplexity, LLC.  All Rights Reserved.
  * www.nplexity.com
  *
- * ps-datepicker.js
+ * ps-timepicker.js
  *
  * v 1.0.2
  *
  *
- * This script converts all input elements with the class 'ps-datepicker'
- * to custom datepicker elements that can be fully styled with CSS.
+ * This script converts all input elements with the class 'ps-timepicker'
+ * to custom timepicker elements that can be fully styled with CSS.
  *
  *
  */
@@ -21,14 +21,14 @@
 document.addEventListener("DOMContentLoaded", function(e) {
     console.log('initiated');
 
-    window.psDatepicker = new PsDatepicker();
+    window.psTimepicker = new PsTimepicker();
 
-    psDatepicker.convert();
+    psTimepicker.convert();
 });
 
-function PsDatepicker () {
+function PsTimepicker () {
 
-    // Function to convert all input elements with the class of 'ps-datepicker' to ps-datepicker elements
+    // Function to convert all input elements with the class of 'ps-timepicker' to ps-timepicker elements
     this.convert = function() {
 
         // Retrieve all input elements with the class of 'ps-datepicker'
