@@ -51,8 +51,12 @@ function navigate(page, back) {
             loadContent("src/v1.0.1/ps-toolkit/ps-toolkit.zip", null);
             break;
         case "delaunay":
+            console.log('loading delaunay...');
+
             loadContent("lib/delaunay.html", function() {
-                $.getScript("src/Delaunay Triangulation/trigScript.js", function() {
+                $.getScript("src/delaunay-triangulation/trig-script.js", function() {
+
+                    console.log('running function');
                     window.trigObj = trigScript(30);
                 });
             });

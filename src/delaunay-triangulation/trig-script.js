@@ -13,9 +13,10 @@ function trigScript(numPoints) {
 	vertices = [];
 
     minX = 0;
-    maxX = 500;
+    maxX = 800;
     minY = 0;
     maxY = 500;
+	maxV = 10;
     cushion = 4;
 
 	initialize(numPoints);
@@ -24,7 +25,7 @@ function trigScript(numPoints) {
 
 		// Generate random vertices and insert into vertices array
 		for(i = 0; i < numPoints; i++) {
-			vertices.push(new Vertex(randomPoint(), randomPoint(), randomVelocity(), randomVelocity()));
+			vertices.push(new Vertex(randomPoint(maxX), randomPoint(maxY), randomVelocity(maxV), randomVelocity(maxV)));
 		}
 
 		// Generate edges array
@@ -61,7 +62,7 @@ function trigScript(numPoints) {
 	function runScript() {
 
 		// Get canvas element and set context
-		var canvas = document.getElementById('canvas');
+		var canvas = document.getElementById('trig-canvas');
 		
 		if (canvas.getContext) {
 			var ctx = canvas.getContext('2d');
@@ -99,12 +100,12 @@ function trigScript(numPoints) {
 		this.cross = 0;
 	}
 
-	function randomPoint() {
-		return Math.floor(Math.random() * (501));
+	function randomPoint(max) {
+		return Math.floor(Math.random() * (max));
 	}
 
-	function randomVelocity() {
-		return Math.floor(Math.random() * (10)) - 5;
+	function randomVelocity(max) {
+		return Math.floor(Math.random() * (max)) - 5;
 	}
 
 	function determineIfOutOfBounds(i) {
