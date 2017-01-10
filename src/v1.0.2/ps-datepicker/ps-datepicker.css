@@ -1,0 +1,184 @@
+/*
+ *
+ *  Programmer: Paul Staff
+ *  Date: 2017.01.09
+ *
+ *  Copyright (c) 2014 - 2017, nplexity, LLC.  All Rights Reserved.
+ *  www.nplexity.com
+ *
+ *  ps-datepicker.css
+ *
+ *
+ *  This is the CSS stylesheet for ps-datepicker.js ps-datepicker elements.
+ *
+ *  To customize the datepicker elements, edit the custom style sections
+ *  of the .ps-datepicker input[type='text'], .dropdown ul, .dropdown ul li,
+ *  and .dropdown ul li:hover blocks.
+ *
+ *  DO NOT EDIT the sections titled 'Required Styles', as these are
+ *  necessary to properly display the datepicker.
+ *
+ *
+ */
+
+
+/* ------------------------------------------------------------------ */
+/*   PS Datepicker CSS Styles                                         */
+/* ------------------------------------------------------------------ */
+
+body {
+    font-family: "Helvetica Neue", sans-serif;
+}
+
+input {
+    font-size: 1em;
+}
+
+.ps-datepicker {
+
+    /* Required Styles */
+    display: inline-flex;
+    position: relative;
+}
+
+.ps-datepicker-display {
+
+    /* Required Styles */
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10000;
+
+    /* Add Custom Styles Here */
+    text-align: center;
+    padding: 1em;
+    background: #ffffff;
+    box-shadow: 0px 0px 12px 2px rgba(100,100,100,0.35);
+}
+
+.d-row {
+
+    /* Required Styles */
+    display: flex;
+
+    /* Add Custom Styles Here */
+    align-items: center;
+}
+
+.d-month {
+
+    /* Add Custom Styles Here */
+    flex-grow: 1;
+    font-size: 1.2em;
+    padding: .3em 0;
+}
+
+.d-left,
+.d-right {
+
+    /* Add Custom Styles Here */
+    font-family: FontAwesome, sans-serif;
+    font-size: 1.2em;
+    padding: .3em .8em;
+    margin: 0 .5em;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.d-left:hover,
+.d-right:hover {
+
+    /* Add Custom Styles Here */
+    background: #999999;
+}
+
+.d-header,
+.d-cell {
+
+    /* Required Styles */
+    display: inline-block;
+    width: 14.285714%;
+
+    /* Add Custom Styles Here */
+    padding: .3em .5em;
+}
+
+.d-header {
+
+    /* Add Custom Styles Here */
+    font-weight: 500;
+    margin: .5em 0 0 0;
+}
+
+.d-cell {
+
+    /* Add Custom Styles Here */
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.d-cell:hover {
+
+    /* Add Custom Styles Here */
+    background: #cccccc;
+}
+
+.d-active {
+
+    /* Add Custom Styles Here */
+}
+
+.d-inactive {
+
+    /* Add Custom Styles Here */
+    color: #999999;
+}
+
+.d-selected {
+
+    /* Add Custom Styles Here */
+    background: #aaaaaa;
+}
+
+
+
+/* ------------------------------------------------------------------ */
+/*   DO NOT EDIT - Required for fade in/out                           */
+/* ------------------------------------------------------------------ */
+
+.ps-datepicker-fade-in {
+
+    /* Required Styles */
+    animation-duration: .25s;
+    animation-fill-mode: forwards;
+    animation-name: ps-datepicker-fade-in;
+}
+
+@keyframes ps-datepicker-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.ps-datepicker-fade-out {
+
+    /* Required Styles */
+    animation-duration: .25s;
+    animation-fill-mode: forwards;
+    animation-name: ps-datepicker-fade-out;
+}
+
+@keyframes ps-datepicker-fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
