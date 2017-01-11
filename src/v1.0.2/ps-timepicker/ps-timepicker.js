@@ -31,94 +31,169 @@ function PsTimepicker () {
     // Function to convert all input elements with the class of 'ps-timepicker' to ps-timepicker elements
     this.convert = function() {
 
-        // Retrieve all input elements with the class of 'ps-datepicker'
-        var inputArray = document.querySelectorAll('input.ps-datepicker');
+        console.log('converting');
 
-        // Initialize variables for creating ps-datepicker elements
-        var datepickerId;
-        var datepicker;
+        // Retrieve all input elements with the class of 'ps-timepicker'
+        var inputArray = document.querySelectorAll('input.ps-timepicker');
+
+        // Initialize variables for creating ps-timepicker elements
+        var timepickerId;
+        var timepicker;
         var input;
         var display;
 
-        // Loop through all input elements and convert to ps-datepicker elements
+        // Loop through all input elements and convert to ps-timepicker elements
         for (var i = 0; i < inputArray.length; ++i) {
 
-            // Set the datepickerId if available; otherwise generate randomly
-            datepickerId = inputArray[i].id != '' ? inputArray[i].id : generateId(10);
+            // Set the timepickerId if available; otherwise generate randomly
+            timeickerId = inputArray[i].id != '' ? inputArray[i].id : generateId(10);
 
-            // Create the datepicker-wrapper node
-            datepicker = document.createElement('div');
-            setAttributes(datepicker, {
-                'id': datepickerId,
+            // Create the timepicker-wrapper node
+            timepicker = document.createElement('div');
+            setAttributes(timepicker, {
+                'id': timepickerId,
                 'class': inputArray[i].className,
-                'data-datepicker-id': datepickerId,
+                'data-timepicker-id': timepickerId,
                 'name': inputArray[i].name
             });
-            datepicker.value = inputArray[i].value;
-            datepicker.addEventListener('click', datepickerClick);
+            timepicker.value = inputArray[i].value;
+            timepicker.addEventListener('click', timepickerClick);
 
             // Create the text input node
             input = document.createElement('input');
             setAttributes(input, {
                 'type': 'text',
                 'value': inputArray[i].value,
-                'placeholder': 'mm/dd/yyyy',
-                'maxlength': 10
+                'placeholder': '12:00 AM',
+                'maxlength': 8
             });
-            input.addEventListener('input', dateMask);
+            // TODO: add this back in
+            //input.addEventListener('input', timeMask);
 
-            // Create the datepicker-display node
+            // Create the timepicker-display node
             display = document.createElement('div');
             setAttributes(display, {
-                'id': datepicker + '-display',
-                'class': 'ps-datepicker-display'
+                'id': timepicker + '-display',
+                'class': 'ps-timepicker-display'
             });
             display.innerHTML = '';
 
             // Append all child nodes to the dropdown-wrapper node
-            datepicker.appendChild(input);
-            datepicker.appendChild(display);
+            timepicker.appendChild(input);
+            timepicker.appendChild(display);
 
             // Replace select with dropdown
-            inputArray[i].parentElement.replaceChild(datepicker, inputArray[i]);
+            inputArray[i].parentElement.replaceChild(timepicker, inputArray[i]);
         }
     };
 
-    // Function triggered when datepicker is clicked
-    function datepickerClick(e) {
+    // Function triggered when timepicker is clicked
+    function timepickerClick(e) {
         // Stop click propagation to prevent immediate closure
         e.stopPropagation();
 
-        // Close all open datepickers
-        datepickerClose();
+        // Close all open timepickers
+        timepickerClose();
 
-        // Open datepicker based on the element clicked
-        datepickerOpen(e.currentTarget.id);
+        // Open timepicker based on the element clicked
+        timepickerOpen(e.currentTarget.id);
     }
 
-    // Function that displays the datepicker
-    function datepickerOpen(id) {
+    // Function that displays the timepicker
+    function timepickerOpen(id) {
 
-        // Retrieve datepicker
-        var datepicker = document.getElementById(id);
-
-        // Generate the datepicker calendar
-        calendarGenerate(datepicker.id, datepicker.querySelector('input').value);
+        // Retrieve timepicker
+        var timepicker = document.getElementById(id);
 
         // Display datepicker and add classes for fade in
-        var display = datepicker.querySelector('.ps-datepicker-display');
-        display.style.display = 'inline-block';
-        display.classList.remove('ps-datepicker-fade-out');
-        display.classList.add('ps-datepicker-fade-in');
+        var display = timepicker.querySelector('.ps-timepicker-display');
 
-        // Remove the datepickerClick click event listener from the datepicker
-        datepicker.removeEventListener('click', datepickerClick);
+        var html = '';
+
+        html += '<div class="t-row">';
+        html += '   <div class="t-btn t-h-up">&#xf106;</div>';
+        html += '   <div class="t-colon"></div>';
+        html += '   <div class="t-btn t-m-up">&#xf106;</div>';
+        html += '   <div class="t-space"></div>';
+        html += '</div>';
+        html += '<div class="t-row">';
+        html += '   <div class="t-out t-hour">12</div>';
+        html += '   <div class="t-colon">:</div>';
+        html += '   <div class="t-out t-min">00</div>';
+        html += '   <div class="t-btn t-ampm">PM</div>';
+        html += '</div>';
+        html += '<div class="t-row">';
+        html += '   <div class="t-btn t-h-down">&#xf107;</div>';
+        html += '   <div class="t-colon"></div>';
+        html += '   <div class="t-btn t-m-down">&#xf107;</div>';
+        html += '   <div class="t-space"></div>';
+        html += '</div>';
+
+        display.innerHTML = html;
+
+        display.querySelector('.t-h-up').addEventListener('click', function() { hourIncrement(id, 1); });
+        display.querySelector('.t-h-down').addEventListener('click', function() { hourIncrement(id, -1); });
+        display.querySelector('.t-m-up').addEventListener('click', function() { minIncrement(id, 5); });
+        display.querySelector('.t-m-down').addEventListener('click', function() { minIncrement(id, -5); });
+        display.querySelector('.t-ampm').addEventListener('click', function() { toggleAMPM(id); });
+
+        display.style.display = 'inline-block';
+        display.classList.remove('ps-timepicker-fade-out');
+        display.classList.add('ps-timepicker-fade-in');
+
+        // Remove the timepickerClick click event listener from the timepicker
+        timepicker.removeEventListener('click', timepickerClick);
 
         // Add a hideOptions click event listener to the window
-        window.addEventListener('click', datepickerCancel);
+        //window.addEventListener('click', timepickerCancel);
     }
 
-    // Function to generate datepicker calendar
+    // Function to increment the minute
+    function minIncrement(id, i) {
+
+        var displayMin = document.querySelector('#' + id + ' .t-min');
+        var m = parseInt(displayMin.innerHTML);
+
+        m = m + i;
+
+        if (m > 59) {
+            m = m - 60;
+            hourIncrement(id, 1);
+        } else if (m < 0) {
+            m = m + 60;
+            hourIncrement(id, -1);
+        }
+
+        displayMin.innerHTML = m < 10 ? '0' + m : m;
+    }
+
+    // Function to increment the hour
+    function hourIncrement(id, i) {
+
+        var displayHour = document.querySelector('#' + id + ' .t-hour');
+        var h = parseInt(displayHour.innerHTML);
+
+        h = h + i;
+        h = h > 12 ? h - 12 : h;
+        h = h < 1 ? h + 12 : h;
+
+        if ((h == 11 && h - i == 12) || (h == 12 && h - i == 11)) {
+            toggleAMPM(id);
+        }
+
+        displayHour.innerHTML = h
+    }
+
+    // Function to toggle AM/PM
+    function toggleAMPM (id) {
+
+        var displayAMPM = document.querySelector('#' + id + ' .t-ampm');
+        displayAMPM.innerHTML = displayAMPM.innerHTML == 'AM' ? 'PM' : 'AM';
+    }
+
+
+
+    /*// Function to generate datepicker calendar
     function calendarGenerate(id, dateStr, selectedDateStr) {
 
         console.log('x: ' + id + ' - ' + dateStr + ' - ' + selectedDateStr);
@@ -204,7 +279,7 @@ function PsTimepicker () {
                 datepickerSet(id, e.target.getAttribute('data-date'));
             });
         }
-    }
+    }*/
 
     // Function to set the datepickerinput
     function datepickerSet(id, date) {
@@ -218,63 +293,43 @@ function PsTimepicker () {
         datepickerClose();
     }
 
-    // Function to cancel the datepicker
-    function datepickerCancel(e) {
+    // Function to cancel the timepicker
+    function timepickerCancel(e) {
 
         // Stop click propagation to prevent immediate closure
         e.stopPropagation();
 
-        // Close datepicker
-        datepickerClose();
+        // Close timepicker
+        timepickerClose();
     }
 
-    // Function that hides all open datepickers
-    function datepickerClose() {
+    // Function that hides all open timepickers
+    function timepickerClose() {
         
-        // Retrieve array of all open datepickers
-        var datepickers = document.querySelectorAll('.ps-datepicker-fade-in');
+        // Retrieve array of all open timepickers
+        var timepickers = document.querySelectorAll('.ps-timepicker-fade-in');
 
-        // Loop through datepickers and remove
-        for (var i = 0; i < datepickers.length; ++i) {
+        // Loop through timepickers and remove
+        for (var i = 0; i < timepickers.length; ++i) {
 
-            // Retrieve datepicker
-            var d = datepickers[i];
+            // Retrieve timepicker
+            var t = timepickers[i];
 
             // Adjust classes to fade out options-wrapper
-            d.classList.remove('ps-datepicker-fade-in');
-            d.classList.add('ps-datepicker-fade-out');
+            t.classList.remove('ps-timepicker-fade-in');
+            t.classList.add('ps-timepicker-fade-out');
 
             // Set timeout to remove option-wrapper after fade out is complete
             setTimeout((function() {
-                d.style.display = 'none';
+                t.style.display = 'none';
             })(), 250);
 
-            // Add click event listner to dropdown-wrapper and remove from window
-            d.parentElement.addEventListener('click', datepickerClick);
-            window.removeEventListener('click', datepickerCancel);
+            // Add click event listner to wrapper and remove from window
+            t.parentElement.addEventListener('click', timepickerClick);
+            window.removeEventListener('click', timepickerCancel);
         }
     }
 
-    // Helper function to return the name of a provided month index
-    function getMonthName(m) {
-
-        var monthArray = [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec"
-        ];
-
-        return monthArray[m];
-    }
 
     // Helper function to force a date input mask
     function dateMask(e) {

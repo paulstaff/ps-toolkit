@@ -34,14 +34,14 @@ input {
     font-size: 1em;
 }
 
-.ps-datepicker {
+.ps-timepicker {
 
     /* Required Styles */
     display: inline-flex;
     position: relative;
 }
 
-.ps-datepicker-display {
+.ps-timepicker-display {
 
     /* Required Styles */
     display: none;
@@ -140,6 +140,61 @@ input {
     /* Add Custom Styles Here */
     background: #aaaaaa;
 }
+
+
+.t-row {
+    display: flex;
+}
+
+.t-btn,
+.t-out,
+.t-space {
+
+    /* Required Styles */
+    display: inline-block;
+    width: 3em;
+
+    /* Add Custom Styles Here */
+    padding: .3em .5em;
+}
+
+.t-btn {
+
+    /* Required Styles */
+    font-family: FontAwesome, sans-serif;
+    position: relative;
+
+    /* Add Custom Styles Here */
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.t-btn::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: none;
+    width: 100%;
+    height: 100%;
+}
+
+.t-btn:hover {
+
+    /* Add Custom Styles Here */
+    background: #cccccc;
+}
+
+.t-colon {
+    /* Required Styles */
+    display: inline-block;
+    width: 2em;
+}
+
+
+
+
 
 
 
