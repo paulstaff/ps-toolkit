@@ -26,13 +26,6 @@
 /*   PS Datepicker CSS Styles                                         */
 /* ------------------------------------------------------------------ */
 
-body {
-    font-family: "Helvetica Neue", sans-serif;
-}
-
-input {
-    font-size: 1em;
-}
 
 .ps-timepicker {
 
@@ -56,91 +49,6 @@ input {
     background: #ffffff;
     box-shadow: 0px 0px 12px 2px rgba(100,100,100,0.35);
 }
-
-.d-row {
-
-    /* Required Styles */
-    display: flex;
-
-    /* Add Custom Styles Here */
-    align-items: center;
-}
-
-.d-month {
-
-    /* Add Custom Styles Here */
-    flex-grow: 1;
-    font-size: 1.2em;
-    padding: .3em 0;
-}
-
-.d-left,
-.d-right {
-
-    /* Add Custom Styles Here */
-    font-family: FontAwesome, sans-serif;
-    font-size: 1.2em;
-    padding: .3em .8em;
-    margin: 0 .5em;
-    border-radius: 2px;
-    cursor: pointer;
-}
-
-.d-left:hover,
-.d-right:hover {
-
-    /* Add Custom Styles Here */
-    background: #999999;
-}
-
-.d-header,
-.d-cell {
-
-    /* Required Styles */
-    display: inline-block;
-    width: 3em;
-
-    /* Add Custom Styles Here */
-    padding: .3em .5em;
-}
-
-.d-header {
-
-    /* Add Custom Styles Here */
-    font-weight: 500;
-    margin: .5em 0 0 0;
-}
-
-.d-cell {
-
-    /* Add Custom Styles Here */
-    border-radius: 2px;
-    cursor: pointer;
-}
-
-.d-cell:hover {
-
-    /* Add Custom Styles Here */
-    background: #cccccc;
-}
-
-.d-active {
-
-    /* Add Custom Styles Here */
-}
-
-.d-inactive {
-
-    /* Add Custom Styles Here */
-    color: #999999;
-}
-
-.d-selected {
-
-    /* Add Custom Styles Here */
-    background: #aaaaaa;
-}
-
 
 .t-row {
     display: flex;
@@ -194,15 +102,11 @@ input {
 
 
 
-
-
-
-
 /* ------------------------------------------------------------------ */
 /*   DO NOT EDIT - Required for fade in/out                           */
 /* ------------------------------------------------------------------ */
 
-.ps-datepicker-fade-in {
+.ps-timepicker-fade-in {
 
     /* Required Styles */
     animation-duration: .25s;
@@ -210,7 +114,7 @@ input {
     animation-name: ps-datepicker-fade-in;
 }
 
-@keyframes ps-datepicker-fade-in {
+@keyframes ps-timepicker-fade-in {
     from {
         opacity: 0;
     }
@@ -220,7 +124,7 @@ input {
     }
 }
 
-.ps-datepicker-fade-out {
+.ps-timepicker-fade-out {
 
     /* Required Styles */
     animation-duration: .25s;
@@ -228,7 +132,7 @@ input {
     animation-name: ps-datepicker-fade-out;
 }
 
-@keyframes ps-datepicker-fade-out {
+@keyframes ps-timepicker-fade-out {
     from {
         opacity: 1;
     }

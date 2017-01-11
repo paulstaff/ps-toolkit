@@ -144,8 +144,10 @@ function PsTimepicker () {
         // Remove the timepickerClick click event listener from the timepicker
         timepicker.removeEventListener('click', timepickerClick);
 
+        timepicker.addEventListener('click', function(e) { e.stopPropagation(); });
+
         // Add a hideOptions click event listener to the window
-        //window.addEventListener('click', timepickerCancel);
+        window.addEventListener('click', timepickerCancel);
     }
 
     // Function to increment the minute
@@ -165,6 +167,7 @@ function PsTimepicker () {
         }
 
         displayMin.innerHTML = m < 10 ? '0' + m : m;
+        setTime(id);
     }
 
     // Function to increment the hour
@@ -181,7 +184,8 @@ function PsTimepicker () {
             toggleAMPM(id);
         }
 
-        displayHour.innerHTML = h
+        displayHour.innerHTML = h;
+        setTime(id);
     }
 
     // Function to toggle AM/PM
@@ -189,8 +193,30 @@ function PsTimepicker () {
 
         var displayAMPM = document.querySelector('#' + id + ' .t-ampm');
         displayAMPM.innerHTML = displayAMPM.innerHTML == 'AM' ? 'PM' : 'AM';
+        setTime(id);
     }
 
+    // Function to get time
+    function getTime(id) {
+
+
+
+
+
+    }
+
+    function setTime(id) {
+
+        var t = document.querySelector('#' + id);
+        var input = t.querySelector('input');
+        var m = t.querySelector('.t-min').innerHTML;
+        var h = t.querySelector('.t-hour').innerHTML;
+        var a = t.querySelector('.t-ampm').innerHTML;
+
+        
+
+        input.value = h + ':' + m + ' ' + a;
+    }
 
 
     /*// Function to generate datepicker calendar
