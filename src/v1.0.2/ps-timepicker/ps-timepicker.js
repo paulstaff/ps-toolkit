@@ -17,7 +17,7 @@
  *
  */
 
-// Initiate ps-datepicker upon document fully loaded
+// Initiate ps-timepicker upon document fully loaded
 document.addEventListener("DOMContentLoaded", function(e) {
     console.log('initiated');
 
@@ -31,7 +31,7 @@ function PsTimepicker () {
     // Function to convert all input elements with the class of 'ps-timepicker' to ps-timepicker elements
     this.convert = function() {
 
-        console.log('converting');
+        document.querySelector('#test-input').addEventListener('input', timeMask);
 
         // Retrieve all input elements with the class of 'ps-timepicker'
         var inputArray = document.querySelectorAll('input.ps-timepicker');
@@ -46,7 +46,7 @@ function PsTimepicker () {
         for (var i = 0; i < inputArray.length; ++i) {
 
             // Set the timepickerId if available; otherwise generate randomly
-            timeickerId = inputArray[i].id != '' ? inputArray[i].id : generateId(10);
+            timepickerId = inputArray[i].id != '' ? inputArray[i].id : generateId(10);
 
             // Create the timepicker-wrapper node
             timepicker = document.createElement('div');
@@ -65,7 +65,8 @@ function PsTimepicker () {
                 'type': 'text',
                 'value': inputArray[i].value,
                 'placeholder': '12:00 AM',
-                'maxlength': 8
+                'maxlength': 8,
+                'readonly': true
             });
             // TODO: add this back in
             //input.addEventListener('input', timeMask);
@@ -130,6 +131,8 @@ function PsTimepicker () {
         html += '</div>';
 
         display.innerHTML = html;
+
+        getTime(id);
 
         display.querySelector('.t-h-up').addEventListener('click', function() { hourIncrement(id, 1); });
         display.querySelector('.t-h-down').addEventListener('click', function() { hourIncrement(id, -1); });
@@ -196,15 +199,21 @@ function PsTimepicker () {
         setTime(id);
     }
 
-    // Function to get time
+    // Function to convert the time string in the input to
     function getTime(id) {
 
+        var t = document.querySelector('#' + id);
+        var timeString = t.querySelector('input').value;
+        var timeStamp = t.getAttribute('data-timestamp');
+        var d1 = new Date(timeString);
+        var d2 = new Date(timeStamp);
 
-
-
+        console.log('1: ' + timeString + ' - ' + d1.toDateString());
+        console.log('2: ' + timeStamp + ' - ' + d2.toDateString());
 
     }
 
+    // Function to set the time in the timepicker input
     function setTime(id) {
 
         var t = document.querySelector('#' + id);
@@ -213,110 +222,12 @@ function PsTimepicker () {
         var h = t.querySelector('.t-hour').innerHTML;
         var a = t.querySelector('.t-ampm').innerHTML;
 
-        
-
         input.value = h + ':' + m + ' ' + a;
-    }
 
+        var timestamp = a == 'PM' ? (parseInt(h) + 11) * 3600000 : (parseInt(h) - 1) * 3600000;
+        timestamp = timestamp + parseInt(m) * 60000;
 
-    /*// Function to generate datepicker calendar
-    function calendarGenerate(id, dateStr, selectedDateStr) {
-
-        console.log('x: ' + id + ' - ' + dateStr + ' - ' + selectedDateStr);
-
-        // If dateStr not set, then set to today
-        dateStr = dateStr == '' ? new Date().toDateString() : dateStr;
-
-        // If curDateStr not set, set to dateStr
-        selectedDateStr = selectedDateStr === undefined ? dateStr : selectedDateStr;
-
-        // Set date, curMonth, and prevMonth
-        var date = isNaN(new Date(dateStr)) ? new Date() : new Date(dateStr);
-        var curMonth = date.getMonth();
-        var prevMonth = curMonth == 0 ? 11 : curMonth - 1;
-        var prevDateStr = prevMonth == 11 ? new Date(date.getFullYear() - 1, prevMonth, 1).toDateString() : new Date(date.getFullYear(), prevMonth, 1).toDateString();
-        var nextDateStr = curMonth == 11 ? new Date(date.getFullYear() + 1, 0, 1).toDateString() : new Date(date.getFullYear(), curMonth + 1, 1).toDateString();
-        var selectedDate = isNaN(new Date(selectedDateStr)) ? new Date() : new Date(selectedDateStr);
-
-        // Retrieve datepicker display element and reset
-        var display = document.getElementById(id).querySelector('.ps-datepicker-display');
-        display.innerHTML = '';
-
-        // Generate HTML for first row of calendars
-        var html = '';
-
-        html += '<div class="d-row">';
-        html += '  <div class="d-left">&#xf104;</div>';
-        html += '  <div class="d-month">' + getMonthName(curMonth) + ' ' + date.getFullYear() + '</div>';
-        html += '  <div class="d-right">&#xf105;</div>';
-        html += '</div>';
-        html += '<div class="d-row">';
-        html += '   <div class="d-header">Su</div>';
-        html += '   <div class="d-header">Mo</div>';
-        html += '   <div class="d-header">Tu</div>';
-        html += '   <div class="d-header">We</div>';
-        html += '   <div class="d-header">Th</div>';
-        html += '   <div class="d-header">Fr</div>';
-        html += '   <div class="d-header">Sa</div>';
-        html += '</div>';
-
-        // Set date to align 1st day of the month with the proper day of the week
-        date.setDate(1);
-        date.setDate(1 - date.getDay());
-
-        // Loop through days of the month to create calendar
-        while (date.getMonth() == curMonth || date.getMonth() == prevMonth) {
-
-            html += '<div class="d-row">';
-
-            // Loop through days to create weeks
-            for (var i = 0; i < 7; i++) {
-
-                // Determine class based on month, add to HTML, and increment
-                var className = date.getMonth() != curMonth ? 'd-cell d-inactive' : 'd-cell d-active';
-                className = date.getMonth() == selectedDate.getMonth() && date.getDate() == selectedDate.getDate() ? className + ' d-selected' : className;
-
-                html += '<div class="' + className + '" data-date="' + getDateString(date) + '">' + date.getDate() + '</div>';
-                date.setDate(date.getDate() + 1);
-            }
-
-            html += '</div>';
-        }
-
-        display.innerHTML = html;
-
-        // Add click events for moving between months
-        display.querySelector('.d-left').addEventListener('click', function(e) {
-            e.stopPropagation();
-            calendarGenerate(id, prevDateStr, selectedDateStr);
-        });
-
-        display.querySelector('.d-right').addEventListener('click', function(e) {
-            e.stopPropagation();
-            calendarGenerate(id, nextDateStr, selectedDateStr);
-        });
-
-        // Add click events for dates
-        var calendarDates = display.querySelectorAll('.d-cell');
-
-        for (var i = 0; i < calendarDates.length; i++) {
-            calendarDates[i].addEventListener('click', function(e) {
-                e.stopPropagation();
-                datepickerSet(id, e.target.getAttribute('data-date'));
-            });
-        }
-    }*/
-
-    // Function to set the datepickerinput
-    function datepickerSet(id, date) {
-
-        console.log('setting date: ' + date);
-
-        // Set datepicker input value to selected value
-        document.querySelector('#' + id + ' input').value = date;
-
-        // Close datepicker
-        datepickerClose();
+        t.setAttribute('data-timestamp', timestamp);
     }
 
     // Function to cancel the timepicker
@@ -357,9 +268,47 @@ function PsTimepicker () {
     }
 
 
-    // Helper function to force a date input mask
-    function dateMask(e) {
-        e.target.value = dateFormat(e.target.value);
+    // Helper function to force a time input mask
+    function timeMask(e) {
+        //e.target.value = timeFormat(e.target.value);
+        timeFormat(e.target.value);
+    }
+
+    // Helper function to format a string input as a time
+    function timeFormat(t) {
+
+        // Capitalize all 'a', 'p', and 'm' characters
+        t = t.replace(/a/, "A");
+        t = t.replace(/p/, "P");
+        t = t.replace(/m/, "M");
+
+        // Remove any non digit, ':', or 'APM' characters
+        t = t.replace(/[^\d:APM]/g,"");
+
+        // Ensure that there is only one instance of ':'
+        t = t.replace(':', 'XXX')
+            .replace(/\:/g, '')
+            .replace('XXX', ':');
+
+        // If the first character is not a 1 or 0, insert 0 at the beginning
+        t = t.replace(/^([^0-1])/, "0$&");
+        t = t.replace(/^(.):/, "0$&");
+
+        // Add a colon if not typed
+        t = t.replace(/^(\d\d)(\d)/, "$1:$2");
+
+
+        // Remove any additional 'A' or 'P' characters
+        t = t.replace('A', 'XXX')
+            .replace(/\A/g, '')
+            .replace('XXX', 'A');
+
+        t = t.replace('P', 'XXX')
+            .replace(/\P/g, '')
+            .replace('XXX', 'P');
+
+        
+        document.querySelector('#test-output').innerHTML = t;
     }
 
     // Helper function to format a string input as a date
