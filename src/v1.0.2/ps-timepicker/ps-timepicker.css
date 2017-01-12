@@ -6,24 +6,23 @@
  *  Copyright (c) 2014 - 2017, nplexity, LLC.  All Rights Reserved.
  *  www.nplexity.com
  *
- *  ps-datepicker.css
+ *  ps-timepicker.css
  *
  *
- *  This is the CSS stylesheet for ps-datepicker.js ps-datepicker elements.
+ *  This is the CSS stylesheet for ps-timepicker.js ps-timepicker elements.
  *
- *  To customize the datepicker elements, edit the custom style sections
- *  of the .ps-datepicker input[type='text'], .dropdown ul, .dropdown ul li,
- *  and .dropdown ul li:hover blocks.
+ *  To customize the timepicker elements, edit the custom style sections
+ *  of the .ps-timepicker and various t-xxx elements.
  *
  *  DO NOT EDIT the sections titled 'Required Styles', as these are
- *  necessary to properly display the datepicker.
+ *  necessary to properly display the timepicker.
  *
  *
  */
 
 
 /* ------------------------------------------------------------------ */
-/*   PS Datepicker CSS Styles                                         */
+/*   PS Timepicker CSS Styles                                         */
 /* ------------------------------------------------------------------ */
 
 

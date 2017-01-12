@@ -19,10 +19,7 @@
 
 // Initiate ps-timepicker upon document fully loaded
 document.addEventListener("DOMContentLoaded", function(e) {
-    console.log('initiated');
-
     window.psTimepicker = new PsTimepicker();
-
     psTimepicker.convert();
 });
 
@@ -184,7 +181,7 @@ function PsTimepicker () {
             toggleAMPM(id);
         }
 
-        displayHour.innerHTML = h;
+        displayHour.innerHTML = h > 9 ? h : '0' + h;
         setTime(id);
     }
 

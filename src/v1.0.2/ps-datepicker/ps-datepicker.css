@@ -26,14 +26,6 @@
 /*   PS Datepicker CSS Styles                                         */
 /* ------------------------------------------------------------------ */
 
-body {
-    font-family: "Helvetica Neue", sans-serif;
-}
-
-input {
-    font-size: 1em;
-}
-
 .ps-datepicker {
 
     /* Required Styles */

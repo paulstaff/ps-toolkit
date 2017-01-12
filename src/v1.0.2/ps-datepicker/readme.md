@@ -51,7 +51,7 @@ There are currently no editable options for PS Datepicker, as this tool is still
 The `ps-datepicker.css` file controls the look and feel of the datepicker. In this CSS file, sections that are required are clearly marked with a **Required Styles** comment while sections that are editable are marked with an **Add Custom Styles Here** comment.  (Technically, all style sections are editable, just make sure you know what you're doing first).  An example of the `ps-datepicker-display` element CSS is below:
 
 ```CSS
-#ps-datepicker-display {
+.ps-datepicker-display {
 
    	/* Required Styles */
     display: none;

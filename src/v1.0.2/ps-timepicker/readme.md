@@ -1,17 +1,17 @@
-PS Datepicker - v1.0.2
+PS Timepicker - v1.0.2
 =================
 
-PS Datepicker provides a datepicker popup that allows the user to select a date value and is easily implementable across browsers (well, it might not have been tested in IE, but does anyone really use IE?).  Generating a datepicker with PS Datepicker involves calling one function--it's that simple!
+PS Timepicker provides a timepicker popup that allows the user to easily cycle through and select a time.
 
 ### Example
 
-Click the input below to open an example datepicker and select a date:
+Click the input below to open an example timepicker and select a date:
 
-<div class="exampleInput"><input type="text" class="ps-datepicker" /></div>
+<div class="exampleInput"><input type="text" class="ps-timepicker" /></div>
 
 ### Version Updates
 
-- Initial version of PS Datepicker
+- Initial version of PS Timepicker
 
 
 Installation
@@ -20,40 +20,41 @@ Installation
 
 ### Prerequisites
 
-- No prerequisites are currently needed for any PS Toolkit plugins. As of version 1.0.1, jQuery is no longer required.
+- No prerequisites other than the included files are currently needed for any PS Toolkit plugins. As of version 1.0.1, jQuery is no longer required.
+- FontAwesome, a free icon font, is required to properly display icons, but is included with the packaged version of PS Timepicker.
 
 ### Instructions
 
-1. Download [ps-datepicker.zip](http://paulstaff.com/random/ps-toolkit/src/v1.0.2/ps-datepicker/ps-datepicker.zip).
-2. Unzip the contents and include the `ps-datepicker.js` and `ps-datepicker.css` files in the plugins folder for your project.
+1. Download [ps-timepicker.zip](http://paulstaff.com/random/ps-toolkit/src/v1.0.2/ps-timepicker/ps-timepicker.zip).
+2. Unzip the contents and include the `ps-timepicker.js` and `ps-timepicker.css` files in the plugins folder for your project.
 3. Ensure that you have [FontAwesome](http://fontawesome.io) included in your project or the icons will not display properly.
 4. Include the following two lines in the `<head>` section of your HTML file (be sure to change file path):
 
 	```HTML
-	<script src="path/to/plugins/folder/ps-datepicker.js"></script>
-	<link rel="stylesheet" href="path/to/plugins/folder/ps-datepicker.css">
+	<script src="path/to/plugins/folder/ps-timepicker.js"></script>
+	<link rel="stylesheet" href="path/to/plugins/folder/ps-timepicker.css">
 	```
 
-5. Add the `ps-datepicker` class to any input that you would like to convert to a datepicker.
-6. All inputs with the `ps-datepicker` class should be converted to datepickers on page load, but if you need to add new datepickers, simply call `psDatepicker.convert()`.
+5. Add the `ps-timepicker` class to any input that you would like to convert to a datepicker.
+6. All inputs with the `ps-timepicker` class should be converted to timepickers on page load, but if you need to add new timepickers, simply call `psTimepicker.convert()`.
 
 
-Using PS Datepicker
+Using PS Timepicker
 -------------------
 
 ### Options
 
-There are currently no editable options for PS Datepicker, as this tool is still an initial release. Additional optionality will be added in the future, but for now, feel free to make any changes necessary to the source code.
+There are currently no editable options for PS Timepicker, as this tool is still an initial release. Additional optionality will be added in the future, but for now, feel free to make any changes necessary to the source code.
 
 
-### Editing Your Datepicker
+### Editing Your Timepicker
 
-The `ps-datepicker.css` file controls the look and feel of the datepicker. In this CSS file, sections that are required are clearly marked with a **Required Styles** comment while sections that are editable are marked with an **Add Custom Styles Here** comment.  (Technically, all style sections are editable, just make sure you know what you're doing first).  An example of the `ps-datepicker-display` element CSS is below:
+The `ps-timepicker.css` file controls the look and feel of the timepicker. In this CSS file, sections that are required are clearly marked with a **Required Styles** comment while sections that are editable are marked with an **Add Custom Styles Here** comment.  (Technically, all style sections are editable, just make sure you know what you're doing first).  An example of the `ps-timepicker-display` element CSS is below:
 
 ```CSS
-#ps-datepicker-display {
+.ps-timepicker-display {
 
-   	/* Required Styles */
+    /* Required Styles */
     display: none;
     position: absolute;
     top: 100%;
@@ -65,7 +66,6 @@ The `ps-datepicker.css` file controls the look and feel of the datepicker. In th
     padding: 1em;
     background: #ffffff;
     box-shadow: 0px 0px 12px 2px rgba(100,100,100,0.35);
-
 }
 ```
 

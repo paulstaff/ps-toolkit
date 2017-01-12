@@ -123,6 +123,16 @@ function navigate(page, back) {
                 setDownloadBtn("src/v1.0.2/ps-datepicker/ps-datepicker.zip");
             });
             break;
+        case "ps-timepicker":
+            loadMarkdown("src/v1.0.2/ps-timepicker/readme.md", function() {
+                loadCSS("src/v1.0.2/ps-timepicker/ps-timepicker.css");
+                $.getScript("src/v1.0.2/ps-timepicker/ps-timepicker.js", function() {
+                    psTimepicker = new PsTimepicker();
+                    psTimepicker.convert();
+                });
+                setDownloadBtn("src/v1.0.2/ps-timepicker/ps-timepicker.zip");
+            });
+            break;
         default:
             loadContent("lib/home.html", null);
             break;
