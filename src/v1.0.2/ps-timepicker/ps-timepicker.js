@@ -31,8 +31,6 @@ function PsTimepicker () {
     // Function to convert all input elements with the class of 'ps-timepicker' to ps-timepicker elements
     this.convert = function() {
 
-        document.querySelector('#test-input').addEventListener('input', timeMask);
-
         // Retrieve all input elements with the class of 'ps-timepicker'
         var inputArray = document.querySelectorAll('input.ps-timepicker');
 
@@ -65,11 +63,10 @@ function PsTimepicker () {
                 'type': 'text',
                 'value': inputArray[i].value,
                 'placeholder': '12:00 AM',
-                'maxlength': 8,
-                'readonly': true
+                'maxlength': 8
             });
             // TODO: add this back in
-            //input.addEventListener('input', timeMask);
+            input.addEventListener('input', timeMask);
 
             // Create the timepicker-display node
             display = document.createElement('div');
@@ -203,14 +200,11 @@ function PsTimepicker () {
     function getTime(id) {
 
         var t = document.querySelector('#' + id);
-        var timeString = t.querySelector('input').value;
-        var timeStamp = t.getAttribute('data-timestamp');
-        var d1 = new Date(timeString);
-        var d2 = new Date(timeStamp);
+        var timeString = t.querySelector('input').value == '' ? '12:00 PM' : t.querySelector('input').value;
 
-        console.log('1: ' + timeString + ' - ' + d1.toDateString());
-        console.log('2: ' + timeStamp + ' - ' + d2.toDateString());
-
+        t.querySelector('.t-hour').innerHTML = timeString.match(/^\d\d/);
+        t.querySelector('.t-min').innerHTML = timeString.substr(3,2);
+        t.querySelector('.t-ampm').innerHTML = timeString.match(/\D\D$/);
     }
 
     // Function to set the time in the timepicker input
@@ -270,8 +264,7 @@ function PsTimepicker () {
 
     // Helper function to force a time input mask
     function timeMask(e) {
-        //e.target.value = timeFormat(e.target.value);
-        timeFormat(e.target.value);
+        e.target.value = timeFormat(e.target.value);
     }
 
     // Helper function to format a string input as a time
@@ -297,6 +290,10 @@ function PsTimepicker () {
         // Add a colon if not typed
         t = t.replace(/^(\d\d)(\d)/, "$1:$2");
 
+        // Add space after time
+        t = t.replace(/^(\d\d:\d\d)([PA])/, "$1 $2");
+
+        t = t.replace(/^(\d\d)([PA])/, "$1:00 $2M");
 
         // Remove any additional 'A' or 'P' characters
         t = t.replace('A', 'XXX')
@@ -307,8 +304,7 @@ function PsTimepicker () {
             .replace(/\P/g, '')
             .replace('XXX', 'P');
 
-        
-        document.querySelector('#test-output').innerHTML = t;
+        return t;
     }
 
     // Helper function to format a string input as a date
